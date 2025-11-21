@@ -17,14 +17,16 @@
   "tailwindStylesheet": "src/routes/layout.css",
   "importOrder": [
     "<BUILTIN_MODULES>",
+    "^(vite|vite/(.*))$",
+    "^@vitejs/(.*)$",
+    "^(svelte|svelte/(.*))$",
+    "^@sveltejs/kit(.*)$",
     "^@sveltejs/(.*)$",
-    "^svelte/(.*)$",
+    "^(?![@.])(.*)$",
     "<THIRD_PARTY_MODULES>",
-    "",
-    "^\\$(?!lib/)(.*)$",
-    "^\\$lib/(.*)$",
+    "^\\$(?!lib)(.*)$",
+    "^\\$lib(.*)$",
     "^(?!.*[.]css$)[./].*$",
-    "",
     ".css$"
   ]
 }
