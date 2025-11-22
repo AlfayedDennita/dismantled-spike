@@ -1,1 +1,85 @@
 @import 'tailwindcss';
+
+@plugin 'daisyui';
+@plugin 'daisyui/theme' {
+  name: 'light';
+  default: true;
+  prefersdark: false;
+  color-scheme: 'light';
+
+  --color-base-100: var(--color-stone-50);
+  --color-base-200: var(--color-stone-100);
+  --color-base-300: var(--color-stone-200);
+  --color-base-content: oklch(14% 0.004 49.25);
+  --color-primary: oklch(54.769% 0.21991 21.327);
+  --color-primary-content: oklch(93.217% 0.01023 81.705);
+  --color-secondary: oklch(20.89% 0.02479 249.115);
+  --color-secondary-content: oklch(93.217% 0.01023 81.705);
+  --color-accent: oklch(93.217% 0.01023 81.705);
+  --color-accent-content: oklch(20.89% 0.02479 249.115);
+  --color-neutral: var(--color-stone-500);
+  --color-neutral-content: var(--color-stone-50);
+  --color-info: var(--color-sky-700);
+  --color-info-content: var(--color-sky-50);
+  --color-success: var(--color-emerald-700);
+  --color-success-content: var(--color-emerald-50);
+  --color-warning: var(--color-yellow-700);
+  --color-warning-content: var(--color-yellow-50);
+  --color-error: var(--color-pink-700);
+  --color-error-content: var(--color-pink-50);
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+@plugin 'daisyui/theme' {
+  name: 'dark';
+  default: false;
+  prefersdark: true;
+  color-scheme: 'dark';
+
+  --color-base-100: var(--color-stone-800);
+  --color-base-200: var(--color-stone-900);
+  --color-base-300: var(--color-stone-950);
+  --color-base-content: var(--color-stone-50);
+  --color-primary: oklch(54.769% 0.21991 21.327);
+  --color-primary-content: oklch(93.217% 0.01023 81.705);
+  --color-secondary: oklch(93.217% 0.01023 81.705);
+  --color-secondary-content: oklch(20.89% 0.02479 249.115);
+  --color-accent: oklch(20.89% 0.02479 249.115);
+  --color-accent-content: oklch(93.217% 0.01023 81.705);
+  --color-neutral: var(--color-stone-500);
+  --color-neutral-content: var(--color-stone-50);
+  --color-info: var(--color-sky-700);
+  --color-info-content: var(--color-sky-50);
+  --color-success: var(--color-emerald-700);
+  --color-success-content: var(--color-emerald-50);
+  --color-warning: var(--color-yellow-700);
+  --color-warning-content: var(--color-yellow-50);
+  --color-error: var(--color-pink-700);
+  --color-error-content: var(--color-pink-50);
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme inline {
+  --font-brand: 'Racing Sans One', sans-serif;
+  --font-body: 'Overpass', sans-serif;
+  --font-sans: var(--font-body);
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@utility btn {
+  @apply uppercase;
+}
