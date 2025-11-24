@@ -42,9 +42,9 @@
   prefersdark: true;
   color-scheme: 'dark';
 
-  --color-base-100: var(--color-stone-800);
+  --color-base-100: var(--color-stone-950);
   --color-base-200: var(--color-stone-900);
-  --color-base-300: var(--color-stone-950);
+  --color-base-300: var(--color-stone-800);
   --color-base-content: var(--color-stone-50);
   --color-primary: oklch(54.769% 0.21991 21.327);
   --color-primary-content: oklch(93.217% 0.01023 81.705);
@@ -70,6 +70,9 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+}
+@plugin '@iconify/tailwind4' {
+  prefixes: famicons, circle-flags;
 }
 
 @theme inline {
