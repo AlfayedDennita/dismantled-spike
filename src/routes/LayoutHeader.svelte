@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import BrandIcon from '$lib/assets/images/icon.svg';
+  import BrandIcon from '$lib/assets/images/brand/icon.svg';
   import { getLocale, setLocale } from '$lib/paraglide/runtime';
 
   const { id, children } = $props();
@@ -103,7 +103,7 @@
         bind:checked={isSearchSidebarShown}
       />
       <div
-        class="drawer-content min-h-dvh"
+        class="drawer-content flex min-h-dvh flex-col"
         inert={isMenuSidebarShown || isSearchSidebarShown}
       >
         <header
@@ -126,7 +126,7 @@
               ></span>
             </button>
             <div
-              class="mx-auto hidden w-full max-w-388 lg:flex lg:justify-between lg:gap-4"
+              class="mx-auto hidden w-full max-w-324 lg:flex lg:justify-between lg:gap-4"
             >
               <nav aria-label="Desktop Navigation">
                 <ul class="menu menu-horizontal p-0">
@@ -173,9 +173,9 @@
                     {#each themes as theme (theme.name)}
                       <li>
                         <button
-                          class="gap-1 px-2 hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
+                          class="gap-1 px-2 text-nowrap hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
                           type="button"
-                          title="Choose {theme.name}"
+                          title={theme.name}
                           onclick={() => {
                             window.theme.theme = theme.id;
                             document.activeElement.blur();
@@ -219,9 +219,9 @@
                     {#each languages as language (language.name)}
                       <li>
                         <button
-                          class="gap-1 px-2 hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
+                          class="gap-1 px-2 text-nowrap hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
                           type="button"
-                          title="Choose {language.name}"
+                          title={language.name}
                           onclick={() => {
                             setLocale(language.id);
                             document.activeElement.blur();
@@ -242,7 +242,7 @@
           </div>
           <div class="max-lg:contents lg:hero lg:px-12">
             <div
-              class="w-full justify-between max-lg:contents lg:hero-content lg:max-w-384 lg:gap-4 lg:px-0 lg:py-8 xl:py-10"
+              class="w-full justify-between max-lg:contents lg:hero-content lg:max-w-7xl lg:gap-4 lg:px-0 lg:py-8 xl:py-10"
             >
               <div class="max-lg:navbar-center">
                 <a
@@ -352,7 +352,7 @@
         Close Menu
       </button>
       <div class="flex flex-col gap-2">
-        <h2 class="px-4 text-sm font-bold uppercase">Categories</h2>
+        <h3 class="px-4 text-sm font-bold uppercase">Categories</h3>
         <nav aria-label="Mobile Navigation">
           <ul class="menu w-full bg-base-300 p-0">
             {#each categories as category (category.name)}
@@ -367,7 +367,7 @@
         </nav>
       </div>
       <div class="flex flex-col gap-2">
-        <h2 class="px-4 text-sm font-bold uppercase">Settings</h2>
+        <h3 class="px-4 text-sm font-bold uppercase">Settings</h3>
         <ul class="menu w-full bg-base-300 p-0">
           <li>
             <details>
@@ -392,8 +392,8 @@
                     <button
                       class="p-4"
                       type="button"
-                      title="Choose {theme.name}"
-                      onclick={() => (window.theme.theme = t.id)}
+                      title={theme.name}
+                      onclick={() => (window.theme.theme = theme.id)}
                     >
                       <span
                         class={['mb-1 iconify', theme.icon]}
@@ -429,7 +429,7 @@
                     <button
                       class="p-4"
                       type="button"
-                      title="Choose {language.name}"
+                      title={language.name}
                       onclick={() => setLocale(language.id)}
                     >
                       <span
