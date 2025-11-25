@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/state';
   import './layout.css';
+  import LayoutFooter from './LayoutFooter.svelte';
   import LayoutHeader from './LayoutHeader.svelte';
 
   const { children } = $props();
@@ -23,4 +24,5 @@
 
 <LayoutHeader>
   {@render children()}
+  <LayoutFooter />
 </LayoutHeader>
