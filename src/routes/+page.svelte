@@ -26,7 +26,8 @@
               <span
                 class="flex grow flex-col justify-center p-4 @sm:flex-row @sm:items-center @sm:justify-start @sm:gap-1 @sm:px-6"
               >
-                <span class="uppercase">
+                <span class="flex items-center gap-1 uppercase">
+                  <span class={['mb-1 iconify', category.icon]}></span>
                   {category.name}
                 </span>
                 {#if !category.url}
