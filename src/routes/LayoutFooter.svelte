@@ -1,6 +1,8 @@
 <script>
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
 
+  let windowScrollY = $state();
+
   const firstBuildYear = 2025;
   const currentYear = new Date().getFullYear();
   const copyrightYear =
@@ -8,6 +10,8 @@
       ? currentYear
       : `${firstBuildYear}\u2013${currentYear}`;
 </script>
+
+<svelte:window bind:scrollY={windowScrollY} />
 
 <footer class="mt-auto bg-base-200 p-8 text-base-content md:py-12 lg:px-12">
   <div
@@ -45,29 +49,38 @@
       </div>
     </div>
     <aside
-      class="flex flex-col items-center justify-end gap-1 text-center text-sm text-base-content/40 contrast-more:text-base-content md:w-1/2 md:items-end md:text-right lg:flex-row"
+      class="flex flex-col items-center justify-end gap-1 text-center text-sm text-base-content/40 contrast-more:text-base-content md:w-1/2 md:items-end md:text-right xl:flex-row"
     >
       <p>
         App Developed by
         <a
-          class="font-bold text-primary/40 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
+          class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
           href="https://alfayeddennita.github.io"
           rel="external"
           target="_blank"
           title="Alfayed Dennita">Alfayed Dennita</a
         >
       </p>
-      <span class="hidden lg:block">-</span>
+      <span class="hidden xl:block">-</span>
       <p>
         Data Provided by
         <a
-          class="font-bold text-primary/40 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
+          class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
           href="https://valorant-api.com"
           rel="external"
           target="_blank"
           title="Valorant-API">Valorant-API</a
         >
       </p>
+      <button
+        class="btn mt-2 btn-soft btn-xs xl:mt-0 xl:ml-2"
+        type="button"
+        title="Back to Top"
+        onclick={() => (windowScrollY = 0)}
+      >
+        <span class="mb-0.5 iconify famicons--arrow-up-sharp"></span>
+        Back to Top
+      </button>
     </aside>
   </div>
 </footer>
