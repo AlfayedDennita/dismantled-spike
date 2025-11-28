@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { page } from '$app/state';
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
   import { getLocale, setLocale } from '$lib/paraglide/runtime';
 
@@ -255,7 +256,8 @@
                     style:mask={`url("${BrandIcon}") no-repeat
                     center`}
                   ></span>
-                  <h1
+                  <svelte:element
+                    this={page.url.pathname === '/' ? 'h1' : 'h2'}
                     class="font-brand text-2xl lg:text-4xl lg:text-primary lg:text-shadow-[-2px_-2px_0_var(--color-base-content),2px_-2px_0_var(--color-base-content),-2px_2px_0_var(--color-base-content),2px_2px_0_var(--color-base-content)]"
                   >
                     <span
@@ -265,7 +267,7 @@
                       DS
                     </span>
                     <span class="hidden @sm:contents">Dismantled Spike</span>
-                  </h1>
+                  </svelte:element>
                 </a>
               </div>
               <div class="max-lg:navbar-end">

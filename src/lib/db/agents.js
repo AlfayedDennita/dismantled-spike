@@ -38,5 +38,9 @@ export async function getAllAgents(fetch) {
     },
   }));
 
-  return filteredAgents;
+  const sortedAgents = filteredAgents.sort((agentA, agentB) =>
+    agentA.name < agentB.name ? -1 : 1
+  );
+
+  return sortedAgents;
 }
