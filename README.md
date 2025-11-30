@@ -1,6 +1,6 @@
 # Dismantled Spike
 
-Simplified one-stop Valorant wiki.
+Simplified one-stop VALORANT wiki.
 
 _Coming soon ...._
 

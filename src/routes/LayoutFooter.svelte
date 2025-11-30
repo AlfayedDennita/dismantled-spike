@@ -39,7 +39,7 @@
           Copyright &copy; {copyrightYear}. All rights reserved.
         </p>
         <p>
-          <b>Dismantled Spike</b> is an unofficial Valorant wiki and is not directly
+          <b>Dismantled Spike</b> is an unofficial VALORANT wiki and is not directly
           affiliated to Riot Games.
         </p>
         <p>
