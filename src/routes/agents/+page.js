@@ -1,6 +1,6 @@
 import db from '$lib/db';
 
-export async function load({ parent, fetch }) {
+export async function load({ fetch, parent }) {
   const agents = await db.agents.getAll(fetch);
   const parentData = await parent();
   const metadata = {

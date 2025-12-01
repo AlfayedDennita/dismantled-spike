@@ -22,7 +22,11 @@
   {/if}
 </svelte:head>
 
-<LayoutHeader>
+<LayoutHeader
+  variant={page.data.layout.variant}
+  backData={page.data.layout.backData}
+  detailTitle={page.data.layout.title}
+>
   {@render children()}
-  <LayoutFooter />
+  <LayoutFooter variant={page.data.layout.variant} />
 </LayoutHeader>

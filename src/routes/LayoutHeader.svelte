@@ -4,7 +4,17 @@
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
   import { getLocale, setLocale } from '$lib/paraglide/runtime';
 
-  const { id, children } = $props();
+  let { id, variant, backData, detailTitle, children } = $props();
+
+  const variants = ['home', 'detail'];
+
+  $effect(() => {
+    if (!variants.includes(variant)) {
+      variant = variants[0];
+    }
+  });
+
+  let windowInnerWidth = $state();
 
   let isMenuSidebarShown = $state(false);
   let isSearchSidebarShown = $state(false);
@@ -15,7 +25,13 @@
     `${isSearchSidebarShown ? 'Close' : 'Open'} Search`
   );
 
-  const categories = [
+  $effect(() => {
+    page.url.pathname;
+    isMenuSidebarShown = false;
+    isSearchSidebarShown = false;
+  });
+
+  const defaultCategories = [
     {
       name: 'Agents',
       url: '/agents',
@@ -32,6 +48,23 @@
       icon: 'famicons--build-sharp',
     },
   ];
+
+  const categories = $derived.by(() => {
+    let computedCategories = defaultCategories;
+
+    if (variant === 'detail' && windowInnerWidth < 1024) {
+      computedCategories = [
+        {
+          name: 'Home',
+          url: '/',
+          icon: 'famicons--home-sharp',
+        },
+        ...computedCategories,
+      ];
+    }
+
+    return computedCategories;
+  });
   const themes = [
     {
       id: 'light',
@@ -88,7 +121,9 @@
   });
 </script>
 
-<div class="drawer">
+<svelte:window bind:innerWidth={windowInnerWidth} />
+
+<div class={['drawer', variant === 'detail' && 'drawer-end']}>
   <input
     class="drawer-toggle invisible"
     id="{id}-menu-sidebar-checkbox"
@@ -108,24 +143,39 @@
         inert={isMenuSidebarShown || isSearchSidebarShown}
       >
         <header
-          class="@container bg-primary p-0 text-primary-content max-lg:navbar lg:bg-base-200 lg:text-base-content"
+          class={[
+            '@container p-0 max-lg:navbar lg:bg-base-200 lg:text-base-content',
+            variant === 'home' && 'bg-primary text-primary-content',
+          ]}
         >
           <div
             class="max-lg:navbar-start lg:bg-primary lg:text-primary-content"
           >
-            <button
-              class="btn btn-square h-16 border-none bg-transparent btn-ghost btn-xl hover:bg-primary-content/20 lg:hidden"
-              type="button"
-              aria-controls="{id}-menu-sidebar-checkbox"
-              aria-expanded={isMenuSidebarShown}
-              aria-label={menuSidebarToggleLabel}
-              title={menuSidebarToggleLabel}
-              onclick={() => (isMenuSidebarShown = true)}
-            >
-              <span
-                class="iconify text-3xl text-primary-content famicons--menu-sharp"
-              ></span>
-            </button>
+            {#if variant === 'home'}
+              <button
+                class="btn btn-square h-16 border-none bg-transparent btn-ghost btn-xl hover:bg-primary-content/20 lg:hidden"
+                type="button"
+                aria-controls="{id}-menu-sidebar-checkbox"
+                aria-expanded={isMenuSidebarShown}
+                aria-label={menuSidebarToggleLabel}
+                title={menuSidebarToggleLabel}
+                onclick={() => (isMenuSidebarShown = true)}
+              >
+                <span
+                  class="iconify text-3xl text-primary-content famicons--menu-sharp"
+                ></span>
+              </button>
+            {:else}
+              <a
+                class="btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden"
+                href={backData?.url || '/'}
+                aria-label={backData?.label || 'Back'}
+                title={backData?.label || 'Back'}
+              >
+                <span class="iconify text-3xl famicons--arrow-back-sharp"
+                ></span>
+              </a>
+            {/if}
             <div
               class="mx-auto hidden w-full max-w-324 lg:flex lg:justify-between lg:gap-4"
             >
@@ -247,7 +297,10 @@
             >
               <div class="max-lg:navbar-center">
                 <a
-                  class="flex items-center gap-2 lg:gap-4"
+                  class={[
+                    'flex items-center gap-2 lg:gap-4',
+                    variant === 'detail' && 'max-lg:hidden',
+                  ]}
                   href="/"
                   title="Dismantled Spike"
                 >
@@ -269,10 +322,19 @@
                     <span class="hidden @sm:contents">Dismantled Spike</span>
                   </svelte:element>
                 </a>
+                {#if variant === 'detail'}
+                  <h2 class="font-extrabold uppercase lg:hidden">
+                    {detailTitle}
+                  </h2>
+                {/if}
               </div>
               <div class="max-lg:navbar-end">
                 <button
-                  class="btn btn-square h-16 border-none bg-transparent btn-ghost btn-xl hover:bg-primary-content/20 lg:hidden"
+                  class={[
+                    'btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden',
+                    variant === 'home' &&
+                      'bg-transparent hover:bg-primary-content/20',
+                  ]}
                   type="button"
                   aria-controls="{id}-search-sidebar-checkbox"
                   aria-expanded={isSearchSidebarShown}
@@ -281,9 +343,25 @@
                   onclick={() => (isSearchSidebarShown = true)}
                 >
                   <span
-                    class="iconify text-3xl text-primary-content famicons--search-sharp"
+                    class={[
+                      'iconify text-3xl famicons--search-sharp',
+                      variant === 'home' && 'text-primary-content',
+                    ]}
                   ></span>
                 </button>
+                {#if variant === 'detail'}
+                  <button
+                    class="btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden"
+                    type="button"
+                    aria-controls="{id}-menu-sidebar-checkbox"
+                    aria-expanded={isMenuSidebarShown}
+                    aria-label={menuSidebarToggleLabel}
+                    title={menuSidebarToggleLabel}
+                    onclick={() => (isMenuSidebarShown = true)}
+                  >
+                    <span class="iconify text-3xl famicons--menu-sharp"></span>
+                  </button>
+                {/if}
                 <label
                   class="input input-lg hidden w-full min-w-md bg-base-300 lg:flex"
                   title="Search"

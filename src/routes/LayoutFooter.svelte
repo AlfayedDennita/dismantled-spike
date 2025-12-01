@@ -1,6 +1,8 @@
 <script>
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
 
+  const { variant } = $props();
+
   let windowScrollY = $state();
 
   const firstBuildYear = 2025;
@@ -13,7 +15,12 @@
 
 <svelte:window bind:scrollY={windowScrollY} />
 
-<footer class="mt-auto bg-base-200 p-8 text-base-content md:py-12 lg:px-12">
+<footer
+  class={[
+    'mt-auto bg-base-200 p-8 text-base-content md:py-12 lg:px-12',
+    variant === 'detail' && 'max-md:hidden',
+  ]}
+>
   <div
     class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row md:items-end"
   >
