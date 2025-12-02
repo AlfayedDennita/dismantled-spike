@@ -72,7 +72,7 @@
   --noise: 0;
 }
 @plugin '@iconify/tailwind4' {
-  prefixes: famicons, circle-flags;
+  prefixes: famicons, game-icons, circle-flags;
 }
 
 @theme inline {
