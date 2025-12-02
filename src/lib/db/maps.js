@@ -47,7 +47,7 @@ export async function getAllMaps(fetch) {
   // Remove old The Range map
   const filteredMaps = maps.filter((map) => !map.mapUrl.endsWith('Range'));
 
-  const mappedmaps = filteredMaps.map((map) => ({
+  const mappedMaps = filteredMaps.map((map) => ({
     id: map.uuid,
     name: map.displayName,
     type: getMapType(map),
@@ -57,7 +57,7 @@ export async function getAllMaps(fetch) {
     sitesDescription: map.tacticalDescription,
   }));
 
-  const sortedMaps = mappedmaps.sort((mapA, mapB) =>
+  const sortedMaps = mappedMaps.sort((mapA, mapB) =>
     mapA.name < mapB.name ? -1 : 1
   );
 
