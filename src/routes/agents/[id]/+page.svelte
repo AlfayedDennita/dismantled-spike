@@ -21,7 +21,7 @@
 
 <main class="lg:px-12">
   <div
-    class="mx-auto flex max-w-7xl flex-col md:gap-4 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:py-12"
+    class="mx-auto flex max-w-7xl flex-col md:gap-4 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:py-16"
   >
     <div
       class="relative flex items-center justify-center bg-base-200 p-4 lg:w-4/12"
