@@ -26,7 +26,7 @@ export async function getAllAgents(fetch) {
     agents = devAgents.data;
   }
 
-  const filteredAgents = agents.map((agent) => ({
+  const mappedAgents = agents.map((agent) => ({
     id: agent.uuid,
     name: agent.displayName,
     images: {
@@ -41,7 +41,7 @@ export async function getAllAgents(fetch) {
     },
   }));
 
-  const sortedAgents = filteredAgents.sort((agentA, agentB) =>
+  const sortedAgents = mappedAgents.sort((agentA, agentB) =>
     agentA.name < agentB.name ? -1 : 1
   );
 
@@ -69,14 +69,14 @@ export async function getAgentById(fetch, id) {
     agent = devAgent.data;
   }
 
-  const filteredAbilities = agent.abilities.map((ability) => ({
+  const mappedAbilities = agent.abilities.map((ability) => ({
     slot: ability.slot,
     name: ability.displayName,
     description: ability.description,
     icon: ability.displayIcon,
   }));
 
-  const sortedAbilities = filteredAbilities.sort((abilityA, abilityB) => {
+  const sortedAbilities = mappedAbilities.sort((abilityA, abilityB) => {
     const slotOrder = [
       'Passive',
       'Grenade',
@@ -91,7 +91,7 @@ export async function getAgentById(fetch, id) {
     );
   });
 
-  const filteredAgent = {
+  const mappedAgent = {
     id: agent.uuid,
     name: agent.displayName,
     description: agent.description,
@@ -110,5 +110,5 @@ export async function getAgentById(fetch, id) {
     abilities: sortedAbilities,
   };
 
-  return filteredAgent;
+  return mappedAgent;
 }
