@@ -23,4 +23,14 @@ export default [
     files: ['**/*.svelte', '**/*.svelte.js'],
     languageOptions: { parserOptions: { svelteConfig } },
   },
+  {
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
 ];

@@ -7,7 +7,7 @@
     SMG: 'game-icons--mp5',
     Shotgun: 'game-icons--sawed-off-shotgun',
     Rifle: 'game-icons--ak47',
-    Sniper: 'game-icons--crosshair',
+    Sniper: 'game-icons--reticule',
     Heavy: 'game-icons--minigun',
   };
 </script>
