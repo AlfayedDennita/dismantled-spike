@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 
   const stringBackgroundGradientColors = $derived.by(() => {
@@ -11,11 +13,11 @@
   });
 
   const abilitiesInfo = {
-    Passive: 'Passive',
+    Passive: m.agent_passive(),
     Grenade: 'C',
     Ability1: 'Q',
     Ability2: 'E',
-    Ultimate: 'X/Ultimate',
+    Ultimate: `X/${m.agent_ultimate()}`,
   };
 </script>
 
@@ -29,7 +31,7 @@
       <img
         class="size-full object-contain object-center"
         src={data.agent.images.portrait}
-        alt="{data.agent.name} Portrait"
+        alt={m.agents_portrait({ agent: data.agent.name })}
       />
       <div
         class="absolute top-4 right-4 aspect-175/256 w-1/5"
@@ -64,13 +66,13 @@
           </div>
         </div>
         <p class="text-sm text-base-content/60 contrast-more:text-base-content">
-          Code Name:
+          {m.agent_code_name()}:
           <span class="font-bold italic">{data.agent.codeName}</span>
         </p>
       </header>
       <p>{data.agent.description}</p>
       <section class="flex flex-col gap-2">
-        <h2 class="font-bold uppercase">Abilities</h2>
+        <h2 class="font-bold uppercase">{m.agent_abilities()}</h2>
         <ul class="flex flex-col gap-2">
           {#each data.agent.abilities as ability, i (ability.name)}
             <li>

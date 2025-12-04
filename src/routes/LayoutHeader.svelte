@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/state';
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
+  import { m } from '$lib/paraglide/messages';
   import { getLocale, setLocale } from '$lib/paraglide/runtime';
 
   let { id, variant, backData, detailTitle, children } = $props();
@@ -19,10 +20,10 @@
   let isMenuSidebarShown = $state(false);
   let isSearchSidebarShown = $state(false);
   const menuSidebarToggleLabel = $derived(
-    `${isMenuSidebarShown ? 'Close' : 'Open'} Menu`
+    `${isMenuSidebarShown ? m.general_close() : m.general_open()} Menu`
   );
   const searchSidebarToggleLabel = $derived(
-    `${isSearchSidebarShown ? 'Close' : 'Open'} Search`
+    `${isSearchSidebarShown ? m.general_close() : m.general_open()} ${m.header_search_title()}`
   );
 
   $effect(() => {
@@ -33,17 +34,17 @@
 
   const defaultCategories = [
     {
-      name: 'Agents',
+      name: m.categories_agents(),
       url: '/agents',
       icon: 'famicons--people-sharp',
     },
     {
-      name: 'Maps',
+      name: m.categories_maps(),
       url: '/maps',
       icon: 'famicons--map-sharp',
     },
     {
-      name: 'Weapons',
+      name: m.categories_weapons(),
       url: '/weapons',
       icon: 'famicons--build-sharp',
     },
@@ -55,7 +56,7 @@
     if (variant === 'detail' && windowInnerWidth < 1024) {
       computedCategories = [
         {
-          name: 'Home',
+          name: m.categories_home(),
           url: '/',
           icon: 'famicons--home-sharp',
         },
@@ -68,17 +69,17 @@
   const themes = [
     {
       id: 'light',
-      name: 'Light',
+      name: m.header_themes_light(),
       icon: 'famicons--sunny-sharp',
     },
     {
       id: 'dark',
-      name: 'Dark',
+      name: m.header_themes_dark(),
       icon: 'famicons--moon-sharp',
     },
     {
       id: null,
-      name: 'System Preference',
+      name: m.header_themes_system(),
       icon: 'famicons--desktop-sharp',
     },
   ];
@@ -169,8 +170,8 @@
               <a
                 class="btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden"
                 href={backData?.url || '/'}
-                aria-label={backData?.label || 'Back'}
-                title={backData?.label || 'Back'}
+                aria-label={backData?.label || m.general_back()}
+                title={backData?.label || m.general_back()}
               >
                 <span class="iconify text-3xl famicons--arrow-back-sharp"
                 ></span>
@@ -179,7 +180,7 @@
             <div
               class="mx-auto hidden w-full max-w-324 lg:flex lg:justify-between lg:gap-4"
             >
-              <nav aria-label="Desktop Navigation">
+              <nav aria-label={m.header_desktop_navigation()}>
                 <ul class="menu menu-horizontal p-0">
                   {#each categories as category (category.name)}
                     <li>
@@ -201,20 +202,17 @@
                     class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
                     role="button"
                     tabindex="0"
-                    title="Choose Theme"
+                    title={m.header_themes_choose()}
                   >
                     <span
                       class={[
                         'mb-1 iconify',
                         activeTheme?.icon || 'famicons--square-sharp',
                       ]}
-                      aria-label={activeTheme?.name
-                        ? `Theme: ${activeTheme.name} Icon`
-                        : undefined}
                     ></span>
                     <span>
-                      <b>Theme:</b>
-                      {activeTheme?.name || 'Loading ....'}
+                      <b>{m.header_themes_title()}:</b>
+                      {activeTheme?.name || `${m.general_loading()} ....`}
                     </span>
                   </div>
                   <ul
@@ -232,10 +230,7 @@
                             document.activeElement.blur();
                           }}
                         >
-                          <span
-                            class={['mb-1 iconify', theme.icon]}
-                            aria-label="Theme: {theme.name} Icon"
-                          ></span>
+                          <span class={['mb-1 iconify', theme.icon]}></span>
                           {theme.name}
                         </button>
                       </li>
@@ -247,20 +242,17 @@
                     class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
                     role="button"
                     tabindex="0"
-                    title="Choose Language"
+                    title={m.header_languages_choose()}
                   >
                     <span
                       class={[
                         'mb-1 iconify-color',
                         activeLanguage?.icon || 'circle-flags--xx',
                       ]}
-                      aria-label={activeLanguage?.name
-                        ? `Language: ${activeLanguage.name} Icon`
-                        : undefined}
                     ></span>
                     <span>
-                      <b>Language:</b>
-                      {activeLanguage?.name || 'Loading ....'}
+                      <b>{m.header_languages_title()}:</b>
+                      {activeLanguage?.name || `${m.general_loading()} ....`}
                     </span>
                   </div>
                   <ul
@@ -278,9 +270,7 @@
                             document.activeElement.blur();
                           }}
                         >
-                          <span
-                            class={['mb-1 iconify-color', language.icon]}
-                            aria-label="Language: {language.name} Icon"
+                          <span class={['mb-1 iconify-color', language.icon]}
                           ></span>
                           {language.name}
                         </button>
@@ -364,13 +354,13 @@
                 {/if}
                 <label
                   class="input input-lg hidden w-full min-w-md bg-base-300 lg:flex"
-                  title="Search"
+                  title={m.header_search_title()}
                 >
                   <span class="iconify famicons--search-sharp"></span>
                   <input
                     type="search"
                     name="{id}-search-mobile"
-                    placeholder="Search something here ...."
+                    placeholder="{m.header_search_placeholder()} ...."
                     bind:value={searchQuery}
                   />
                 </label>
@@ -397,15 +387,19 @@
             onclick={() => (isSearchSidebarShown = false)}
           >
             <span class="mb-1 iconify text-lg famicons--close-sharp"></span>
-            Close Search
+            {m.general_close()}
+            {m.header_search_title()}
           </button>
           <div class="px-4">
-            <label class="input input-lg w-full bg-transparent" title="Search">
+            <label
+              class="input input-lg w-full bg-transparent"
+              title={m.header_search_title()}
+            >
               <span class="iconify famicons--search-sharp"></span>
               <input
                 type="search"
                 name="{id}-search-mobile"
-                placeholder="Search something here ...."
+                placeholder="{m.header_search_placeholder()} ...."
                 bind:value={searchQuery}
               />
             </label>
@@ -429,11 +423,11 @@
         onclick={() => (isMenuSidebarShown = false)}
       >
         <span class="mb-1 iconify text-lg famicons--close-sharp"></span>
-        Close Menu
+        {m.general_close()} Menu
       </button>
       <div class="flex flex-col gap-2">
-        <h3 class="px-4 text-sm font-bold uppercase">Categories</h3>
-        <nav aria-label="Mobile Navigation">
+        <h3 class="px-4 text-sm font-bold uppercase">{m.categories_title()}</h3>
+        <nav aria-label={m.header_mobile_navigation()}>
           <ul class="menu w-full bg-base-300 p-0">
             {#each categories as category (category.name)}
               <li>
@@ -447,23 +441,22 @@
         </nav>
       </div>
       <div class="flex flex-col gap-2">
-        <h3 class="px-4 text-sm font-bold uppercase">Settings</h3>
+        <h3 class="px-4 text-sm font-bold uppercase">
+          {m.header_settings()}
+        </h3>
         <ul class="menu w-full bg-base-300 p-0">
           <li>
             <details>
-              <summary class="p-4" title="Choose Theme">
+              <summary class="p-4" title={m.header_themes_choose()}>
                 <span
                   class={[
                     'mb-1 iconify',
                     activeTheme?.icon || 'famicons--square-sharp',
                   ]}
-                  aria-label={activeTheme?.name
-                    ? `Theme: ${activeTheme.name} Icon`
-                    : undefined}
                 ></span>
                 <span>
                   <b>Theme:</b>
-                  {activeTheme?.name || 'Loading ....'}
+                  {activeTheme?.name || `${m.general_loading()} ....`}
                 </span>
               </summary>
               <ul>
@@ -475,10 +468,7 @@
                       title={theme.name}
                       onclick={() => (window.theme.theme = theme.id)}
                     >
-                      <span
-                        class={['mb-1 iconify', theme.icon]}
-                        aria-label="Theme: {theme.name} Icon"
-                      ></span>
+                      <span class={['mb-1 iconify', theme.icon]}></span>
                       {theme.name}
                     </button>
                   </li>
@@ -488,19 +478,16 @@
           </li>
           <li>
             <details>
-              <summary class="p-4" title="Choose Language">
+              <summary class="p-4" title={m.header_languages_choose()}>
                 <span
                   class={[
                     'mb-1 iconify-color',
                     activeLanguage?.icon || 'circle-flags--xx',
                   ]}
-                  aria-label={activeLanguage?.name
-                    ? `Language: ${activeLanguage.name} Icon`
-                    : undefined}
                 ></span>
                 <span>
-                  <b>Language:</b>
-                  {activeLanguage?.name || 'Loading ....'}
+                  <b>{m.header_languages_title()}:</b>
+                  {activeLanguage?.name || `${m.general_loading()} ....`}
                 </span>
               </summary>
               <ul>
@@ -512,9 +499,7 @@
                       title={language.name}
                       onclick={() => setLocale(language.id)}
                     >
-                      <span
-                        class={['mb-1 iconify-color', language.icon]}
-                        aria-label="Language: {language.name} Icon"
+                      <span class={['mb-1 iconify-color', language.icon]}
                       ></span>
                       {language.name}
                     </button>

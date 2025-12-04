@@ -1,4 +1,136 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "hello_world": "Hello, {name} from en!"
+
+  "app_tagline": "Simplified One-Stop VALORANT Wiki",
+  "app_description": "Dismantled Spike is a simplified one-stop VALORANT wiki that contains essential VALORANT information to boost your game knowledge. Find information about VALORANT agents, maps, weapons, and more easily in Dismantled Spike. All VALORANT data on this web app is obtained from Valorant-API (valorant-api.com) as a public API provider.",
+  "app_additional_keywords_1": "game",
+  "app_additional_keywords_2": "guide",
+
+  "general_loading": "Loading",
+  "general_open": "Open",
+  "general_close": "Close",
+  "general_back": "Back",
+
+  "categories_title": "Categories",
+  "categories_home": "Home",
+  "categories_agents": "Agents",
+  "categories_maps": "Maps",
+  "categories_weapons": "Weapons",
+  "categories_bundles": "Bundles",
+  "categories_coming_soon": "Coming Soon",
+
+  "header_themes_title": "Theme",
+  "header_themes_light": "Light",
+  "header_themes_dark": "Dark",
+  "header_themes_system": "System Preference",
+  "header_themes_choose": "Choose Theme",
+  "header_languages_title": "Language",
+  "header_languages_choose": "Choose Language",
+  "header_search_title": "Search",
+  "header_search_placeholder": "Search something here",
+  "header_desktop_navigation": "Desktop Navigation",
+  "header_mobile_navigation": "Mobile Navigation",
+  "header_settings": "Settings",
+
+  "footer_copyright": "Copyright &copy; {year}. All rights reserved.",
+  "footer_description": "is an unofficial VALORANT wiki and is not directly affiliated to Riot Games.",
+  "footer_riot_copyright": "RIOT GAMES, VALORANT, and any associated logos are trademarks, service marks, and/or registered trademarks of Riot Games, Inc.",
+  "footer_app_developed_by": "App Developed by",
+  "footer_data_provided_by": "Data Provided by",
+  "footer_back_to_top": "Back to Top",
+
+  "home_recent_visits_title": "Your Recent Visits",
+
+  "agents_description": "Agents are the playable characters in VALORANT, representing an agent of the VALORANT protocol. Each agent serves as a different role or class with four unique abilities. There are four roles/classes: duelist, initiator, controller, and sentinel.",
+  "agents_additional_keywords_1": "agents",
+  "agents_additional_keywords_2": "characters",
+  "agents_additional_keywords_3": "heroes",
+  "agents_portrait": "{agent} Portrait",
+
+  "agent_additional_keywords_1": "agent",
+  "agent_additional_keywords_2": "character",
+  "agent_additional_keywords_3": "hero",
+  "agent_back_to_agents": "Back to Agents",
+  "agent_passive": "Passive",
+  "agent_ultimate": "Ultimate",
+  "agent_code_name": "Code Name",
+  "agent_abilities": "Abilities",
+
+  "maps_description": "Each match of VALORANT takes place on a map. There are four map types: standard, team deathmatch, skirmish, and practice. VALORANT uses a deterministic map system in order to increase the variety of maps players will encounter and vastly reduce the possibility of playing on the same map multiple times in a row.",
+  "maps_additional_keywords_1": "maps",
+  "maps_splash_art": "{map} Splash Art",
+  "maps_types_standard": "Standard",
+  "maps_types_practice": "Practice",
+
+  "map_type": "Type",
+  "map_additional_keywords_1": "map",
+  "map_back_to_agents": "Back to Maps",
+  "map_coordinates": "Coordinates",
+  "map_layout": "Layout",
+  "map_callouts": "Callouts",
+
+  "weapons_description": "Weapons (arsenal) are used by agents (players) to damage and kill/destroy enemy agents and their utilities. Weapons are separated into three main categories: melee, sidearms, and primary weapons. Sidearms consist of pistols, while primary weapons are further split into SMGs, shotguns, rifles, sniper rifles, and heavy machine guns.",
+  "weapons_additional_keywords_1": "weapons",
+  "weapons_additional_keywords_2": "guns",
+  "weapons_categories_melee": "Melee",
+  "weapons_categories_sidearm": "Sidearm",
+
+  "weapon_category": "Category",
+  "weapon_additional_keywords_1": "weapon",
+  "weapon_back_to_agents": "Back to Weapons",
+  "weapon_cost_title": "Cost",
+  "weapon_cost_credit": "Credit",
+  "weapon_cost_credits": "Credits",
+  "weapon_cost_free": "Free",
+  "weapon_fire_mode_semi_automatic": "Semi-Automatic",
+  "weapon_features_silenced": "Silenced",
+  "weapon_features_dual_zoom": "Dual Zoom",
+  "weapon_features_rof_increase": "Rate of Fire Increase",
+  "weapon_wall_penetrations_low": "Low",
+  "weapon_wall_penetrations_medium": "Medium",
+  "weapon_wall_penetrations_high": "High",
+  "weapon_stats_title_general": "General Stats",
+  "weapon_stats_title_alt_fire": "Alt-Fire Stats",
+  "weapon_stats_fire_mode": "Fire Mode",
+  "weapon_stats_feature": "Feature",
+  "weapon_stats_wall_penetration": "Wall Penetration",
+  "weapon_stats_magazine_size": "Magazine Size",
+  "weapon_stats_pellet_count": "Pellet Count",
+  "weapon_stats_fire_rate": "Fire Rate",
+  "weapon_stats_first_bullet_miss": "First Bullet Miss",
+  "weapon_stats_run_speed_multiplier": "Run Speed Multiplier",
+  "weapon_stats_equip_time": "Equip Time",
+  "weapon_stats_reload_time": "Reload Time",
+  "weapon_stats_alt_fire_type": "Alt-Fire Type",
+  "weapon_stats_zoom_multiplier": "Zoom Multiplier",
+  "weapon_stats_burst_count": "Burst Count",
+  "weapon_stats_burst_rate": "Burst Rate",
+  "weapon_stats_burst_distance": "Burst Distance",
+  "weapon_units_sec": "sec",
+  "weapon_units_rounds_per_sec": "rounds/sec",
+  "weapon_units_bursts_per_sec": "bursts/sec",
+  "weapon_units_round": [
+    {
+      "declarations": ["input value", "local valuePlural = value: plural"],
+      "selectors": ["valuePlural"],
+      "match": {
+        "valuePlural=one": "{value} round",
+        "valuePlural=other": "{value} rounds"
+      }
+    }
+  ],
+  "weapon_units_pellet": [
+    {
+      "declarations": ["input value", "local valuePlural = value: plural"],
+      "selectors": ["valuePlural"],
+      "match": {
+        "valuePlural=one": "{value} pellet",
+        "valuePlural=other": "{value} pellets"
+      }
+    }
+  ],
+  "weapon_damages_title": "Damage Ranges",
+  "weapon_damages_head": "Head",
+  "weapon_damages_body": "Body",
+  "weapon_damages_leg": "Leg"
 }

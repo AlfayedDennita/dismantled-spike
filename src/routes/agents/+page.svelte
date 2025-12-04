@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 </script>
 
@@ -7,7 +9,7 @@
     <h1
       class=" text-center text-2xl font-bold uppercase lg:text-3xl lg:font-extrabold"
     >
-      Agents
+      {m.categories_agents()}
     </h1>
     <div class="flex flex-wrap justify-center gap-8">
       {#each data.agents as agent (agent.id)}
@@ -25,7 +27,7 @@
               <img
                 class="z-10"
                 src={agent.images.portrait}
-                alt="{agent.name} Portrait"
+                alt={m.agents_portrait({ agent: agent.name })}
               />
             </figure>
             <div class="card-body bg-primary text-primary-content">

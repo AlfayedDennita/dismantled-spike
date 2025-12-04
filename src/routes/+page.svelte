@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 </script>
 
@@ -8,7 +10,7 @@
   >
     <main class="lg:w-8/12">
       <section class="flex flex-col gap-4 p-4 md:bg-base-200 md:p-8">
-        <h3 class="text-lg font-bold uppercase">Categories</h3>
+        <h3 class="text-lg font-bold uppercase">{m.categories_title()}</h3>
         <ul class="grid gap-4 sm:grid-cols-2">
           {#each data.categories as category (category.name)}
             <li class="contents">
@@ -34,7 +36,7 @@
                   {#if !category.url}
                     <span
                       class="text-xs text-primary-content/40 italic contrast-more:text-primary-content"
-                      >(Coming Soon)</span
+                      >({m.categories_coming_soon()})</span
                     >
                   {/if}
                 </span>
@@ -48,7 +50,7 @@
                     <span
                       class="invisible absolute inset-0 z-10 flex w-0 items-center justify-center gap-1 overflow-hidden bg-secondary text-sm font-bold text-secondary-content uppercase transition-all group-hover:visible group-hover:w-full motion-reduce:transition-none"
                     >
-                      Open
+                      {m.general_open()}
                       <span class="mb-1 iconify famicons--open-sharp"></span>
                     </span>
                   {/if}
@@ -61,7 +63,9 @@
     </main>
     <aside class="lg:w-4/12">
       <section class="flex flex-col gap-4 p-4 md:bg-base-200 md:p-8">
-        <h3 class="text-lg font-bold uppercase">Your Recent Visits</h3>
+        <h3 class="text-lg font-bold uppercase">
+          {m.home_recent_visits_title()}
+        </h3>
         <ul class="menu w-full bg-base-200 md:bg-base-300">
           {#each data.recentVisits as recentVisit (recentVisit.name)}
             <li>

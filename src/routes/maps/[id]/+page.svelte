@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 
   const typeIcons = {
@@ -6,6 +8,13 @@
     'Team Deathmatch': 'famicons--planet-sharp',
     Skirmish: 'famicons--cube-sharp',
     Practice: 'famicons--body-sharp',
+  };
+
+  const displayType = {
+    Standard: m.maps_types_standard(),
+    'Team Deathmatch': 'Team Deathmatch',
+    Skirmish: 'Skirmish',
+    Practice: m.maps_types_practice(),
   };
 </script>
 
@@ -16,7 +25,7 @@
     <img
       class="aspect-video w-full object-cover object-center lg:w-5/12"
       src={data.map.images.splash}
-      alt="{data.map.name} Splash Art"
+      alt={m.maps_splash_art({ map: data.map.name })}
     />
     <section
       class="flex flex-col gap-4 px-4 py-8 md:mx-4 md:bg-base-200 md:p-8 lg:mx-0 lg:w-7/12"
@@ -26,27 +35,27 @@
           <h1 class="text-2xl font-extrabold">{data.map.name}</h1>
           <div class="badge gap-1 badge-primary">
             <span class="mb-0.5 iconify {typeIcons[data.map.type]}"></span>
-            {data.map.type}
+            {displayType[data.map.type]}
           </div>
         </div>
         {#if data.map.coordinates}
           <p
             class="text-sm text-base-content/60 contrast-more:text-base-content"
           >
-            Coordinates:
+            {m.map_coordinates()}:
             <span class="font-bold italic">{data.map.coordinates}</span>
           </p>
         {/if}
       </header>
       {#if data.map.images.layout}
         <section class="flex flex-col gap-2">
-          <h2 class="font-bold uppercase">Layout</h2>
+          <h2 class="font-bold uppercase">{m.map_layout()}</h2>
           <img src={data.map.images.layout} alt="{data.map.name} Layout" />
         </section>
       {/if}
       {#if data.map.callouts}
         <section class="flex flex-col gap-2">
-          <h2 class="font-bold uppercase">Callouts</h2>
+          <h2 class="font-bold uppercase">{m.map_callouts()}</h2>
           <ul class="flex flex-col gap-2">
             {#each Object.entries(data.map.callouts) as [superRegion, regions], i (superRegion)}
               <li>

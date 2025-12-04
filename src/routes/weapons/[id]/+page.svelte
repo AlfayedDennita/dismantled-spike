@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 
   const categoryIcons = {
@@ -11,22 +13,36 @@
     Heavy: 'game-icons--minigun',
   };
 
+  const displayCategory = {
+    Melee: m.weapons_categories_melee(),
+    Sidearm: m.weapons_categories_sidearm(),
+    SMG: 'SMG',
+    Shotgun: 'Shotgun',
+    Rifle: 'Rifle',
+    Sniper: 'Sniper',
+    Heavy: 'Heavy Machine Gun',
+  };
   const displayCost = $derived.by(() => {
     if (data.weapon.cost === 1) {
-      return `${data.weapon.cost} Credit`;
+      return `${data.weapon.cost} ${m.weapon_cost_credit()}`;
     } else if (data.weapon.cost > 1) {
-      return `${data.weapon.cost} Credits`;
+      return `${data.weapon.cost} ${m.weapon_cost_credits()}`;
     } else {
-      return 'Free';
+      return m.weapon_cost_free();
     }
   });
+  const displayWallPenetration = {
+    Low: m.weapon_wall_penetrations_low(),
+    Medium: m.weapon_wall_penetrations_medium(),
+    High: m.weapon_wall_penetrations_high(),
+  };
   const displayFireMode = {
-    SemiAutomatic: 'Semi-Automatic',
+    SemiAutomatic: m.weapon_fire_mode_semi_automatic(),
   };
   const displayFeature = {
-    Silenced: 'Silenced',
-    DualZoom: 'Dual Zoom',
-    ROFIncrease: 'Rate of Fire Increase',
+    Silenced: m.weapon_features_silenced(),
+    DualZoom: m.weapon_features_dual_zoom(),
+    ROFIncrease: m.weapon_features_rof_increase(),
   };
   const displayAltFireType = {
     ADS: 'ADS',
@@ -37,51 +53,51 @@
   const generalStats = [
     {
       id: 'fireMode',
-      name: 'Fire Mode',
+      name: m.weapon_stats_fire_mode(),
       icon: 'game-icons--duel',
       check: (stats) => typeof stats.fireMode === 'string',
       value: (stats) => displayFireMode[stats.fireMode],
     },
     {
       id: 'feature',
-      name: 'Feature',
+      name: m.weapon_stats_feature(),
       icon: 'famicons--sparkles-sharp',
       check: (stats) => typeof stats.feature === 'string',
       value: (stats) => displayFeature[stats.feature],
     },
     {
       id: 'wallPenetration',
-      name: 'Wall Penetration',
+      name: m.weapon_stats_wall_penetration(),
       icon: 'game-icons--supersonic-bullet',
       check: (stats) => typeof stats.wallPenetration === 'string',
-      value: (stats) => stats.wallPenetration,
+      value: (stats) => displayWallPenetration[stats.wallPenetration],
     },
     {
       id: 'magazineSize',
-      name: 'Magazine Size',
+      name: m.weapon_stats_magazine_size(),
       icon: 'game-icons--machine-gun-magazine',
       check: (stats) => typeof stats.magazineSize === 'number',
-      value: (stats) =>
-        `${stats.magazineSize} round${stats.magazineSize > 1 ? 's' : ''}`,
+      value: (stats) => m.weapon_units_round({ value: stats.magazineSize }),
     },
     {
       id: 'shotgunPelletCount',
-      name: 'Pellet Count',
+      name: m.weapon_stats_pellet_count(),
       icon: 'game-icons--shotgun-rounds',
       check: (stats) => stats.shotgunPelletCount > 1,
       value: (stats) =>
-        `${stats.shotgunPelletCount} pellet${stats.shotgunPelletCount > 1 ? 's' : ''}`,
+        m.weapon_units_pellet({ value: stats.shotgunPelletCount }),
     },
     {
       id: 'fireRate',
-      name: 'Fire Rate',
+      name: m.weapon_stats_fire_rate(),
       icon: 'game-icons--silver-bullet',
       check: (stats) => typeof stats.fireRate === 'number',
-      value: (stats) => `${parseFloat(stats.fireRate.toFixed(2))} rounds/s`,
+      value: (stats) =>
+        `${parseFloat(stats.fireRate.toFixed(2))} ${m.weapon_units_rounds_per_sec()}`,
     },
     {
       id: 'firstBulletAccuracy',
-      name: 'First Bullet Miss',
+      name: m.weapon_stats_first_bullet_miss(),
       icon: 'game-icons--targeting',
       check: (stats) => typeof stats.firstBulletAccuracy === 'number',
       value: (stats) =>
@@ -89,7 +105,7 @@
     },
     {
       id: 'runSpeedMultiplier',
-      name: 'Run Speed Multiplier',
+      name: m.weapon_stats_run_speed_multiplier(),
       icon: 'game-icons--run',
       check: (stats) => typeof stats.runSpeedMultiplier === 'number',
       value: (stats) =>
@@ -97,30 +113,32 @@
     },
     {
       id: 'equipTimeSeconds',
-      name: 'Equip Time',
+      name: m.weapon_stats_equip_time(),
       icon: 'game-icons--hand-bandage',
       check: (stats) => typeof stats.equipTimeSeconds === 'number',
-      value: (stats) => `${parseFloat(stats.equipTimeSeconds.toFixed(2))} s`,
+      value: (stats) =>
+        `${parseFloat(stats.equipTimeSeconds.toFixed(2))} ${m.weapon_units_sec()}`,
     },
     {
       id: 'reloadTimeSeconds',
-      name: 'Reload Time',
+      name: m.weapon_stats_reload_time(),
       icon: 'game-icons--reload-gun-barrel',
       check: (stats) => typeof stats.reloadTimeSeconds === 'number',
-      value: (stats) => `${parseFloat(stats.reloadTimeSeconds.toFixed(2))} s`,
+      value: (stats) =>
+        `${parseFloat(stats.reloadTimeSeconds.toFixed(2))} ${m.weapon_units_sec()}`,
     },
   ];
   const altFireStats = [
     {
       id: 'altFireType',
-      name: 'Type',
+      name: m.weapon_stats_alt_fire_type(),
       icon: 'game-icons--switch-weapon',
       check: (stats) => typeof stats.altFireType === 'string',
       value: (stats) => displayAltFireType[stats.altFireType],
     },
     {
       id: 'adsStats.zoomMultiplier',
-      name: 'Zoom Multiplier',
+      name: m.weapon_stats_zoom_multiplier(),
       icon: 'game-icons--reticule',
       check: (stats) => typeof stats.adsStats?.zoomMultiplier === 'number',
       value: (stats) =>
@@ -128,23 +146,23 @@
     },
     {
       id: 'adsStats.burstCount',
-      name: 'Burst Count',
+      name: m.weapon_stats_burst_count(),
       icon: 'game-icons--bullet-impacts',
       check: (stats) => stats.adsStats?.burstCount > 0,
       value: (stats) =>
-        `${stats.adsStats?.burstCount} round${stats.adsStats?.burstCount > 1 ? 's' : ''}`,
+        m.weapon_units_round({ value: stats.adsStats?.burstCount }),
     },
     {
       id: 'adsStats.fireRate',
-      name: 'Fire Rate',
+      name: m.weapon_stats_fire_rate(),
       icon: 'game-icons--silver-bullet',
       check: (stats) => typeof stats.adsStats?.fireRate === 'number',
       value: (stats) =>
-        `${parseFloat(stats.adsStats?.fireRate.toFixed(2))} rounds/s`,
+        `${parseFloat(stats.adsStats?.fireRate.toFixed(2))} ${m.weapon_units_rounds_per_sec()}`,
     },
     {
       id: 'adsStats.firstBulletAccuracy',
-      name: 'First Bullet Miss',
+      name: m.weapon_stats_first_bullet_miss(),
       icon: 'game-icons--targeting',
       check: (stats) => typeof stats.adsStats?.firstBulletAccuracy === 'number',
       value: (stats) =>
@@ -152,7 +170,7 @@
     },
     {
       id: 'adsStats.runSpeedMultiplier',
-      name: 'Run Speed Multiplier',
+      name: m.weapon_stats_run_speed_multiplier(),
       icon: 'game-icons--run',
       check: (stats) => typeof stats.adsStats?.runSpeedMultiplier === 'number',
       value: (stats) =>
@@ -160,33 +178,37 @@
     },
     {
       id: 'altShotgunStats.shotgunPelletCount',
-      name: 'Pellet Count',
+      name: m.weapon_stats_pellet_count(),
       icon: 'game-icons--heavy-bullets',
       check: (stats) =>
         typeof stats.altShotgunStats?.shotgunPelletCount === 'number',
       value: (stats) =>
-        `${stats.altShotgunStats?.shotgunPelletCount} pellet${stats.altShotgunStats?.shotgunPelletCount > 1 ? 's' : ''}`,
+        m.weapon_units_pellet({
+          value: stats.altShotgunStats?.shotgunPelletCount,
+        }),
     },
     {
       id: 'altShotgunStats.burstRate',
-      name: 'Burst Rate',
+      name: m.weapon_stats_burst_rate(),
       icon: 'game-icons--bullets',
       check: (stats) => typeof stats.altShotgunStats?.burstRate === 'number',
       value: (stats) =>
-        `${parseFloat(stats.altShotgunStats?.burstRate.toFixed(2))} bursts/s`,
+        `${parseFloat(stats.altShotgunStats?.burstRate.toFixed(2))} ${m.weapon_units_bursts_per_sec()}`,
     },
     {
       id: 'airBurstStats.shotgunPelletCount',
-      name: 'Pellet Count',
+      name: m.weapon_stats_pellet_count(),
       icon: 'game-icons--shotgun-rounds',
       check: (stats) =>
         typeof stats.airBurstStats?.shotgunPelletCount === 'number',
       value: (stats) =>
-        `${stats.airBurstStats?.shotgunPelletCount} pellet${stats.airBurstStats?.shotgunPelletCount > 1 ? 's' : ''}`,
+        m.weapon_units_pellet({
+          value: stats.airBurstStats?.shotgunPelletCount,
+        }),
     },
     {
       id: 'airBurstStats.burstDistance',
-      name: 'Burst Distance',
+      name: m.weapon_stats_burst_distance(),
       icon: 'game-icons--wide-arrow-dunk',
       check: (stats) => typeof stats.airBurstStats?.burstDistance === 'number',
       value: (stats) =>
@@ -196,17 +218,17 @@
   const damageRanges = [
     {
       id: 'headDamage',
-      name: 'Head',
+      name: m.weapon_damages_head(),
       icon: 'game-icons--headshot',
     },
     {
       id: 'bodyDamage',
-      name: 'Body',
+      name: m.weapon_damages_body(),
       icon: 'game-icons--pierced-body',
     },
     {
       id: 'legDamage',
-      name: 'Leg',
+      name: m.weapon_damages_leg(),
       icon: 'game-icons--hieroglyph-legs',
     },
   ];
@@ -244,13 +266,13 @@
           <div class="badge gap-1 badge-primary">
             <span class="mb-0.5 iconify {categoryIcons[data.weapon.category]}"
             ></span>
-            {data.weapon.category}
+            {displayCategory[data.weapon.category]}
           </div>
         </div>
         <p
           class="flex items-center gap-2 text-sm text-base-content/60 contrast-more:text-base-content"
         >
-          Cost:
+          {m.weapon_cost_title()}:
           <span class="inline-flex items-center gap-1 font-bold">
             <span class="mb-1 iconify game-icons--two-coins"></span>
             {displayCost}
@@ -259,7 +281,7 @@
       </header>
       {#if data.weapon.name !== 'Melee'}
         <section class="flex flex-col gap-2">
-          <h2 class="font-bold uppercase">General Stats</h2>
+          <h2 class="font-bold uppercase">{m.weapon_stats_title_general()}</h2>
           <ul
             class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3"
           >
@@ -277,7 +299,7 @@
       {/if}
       {#if data.weapon.stats.altFireType}
         <section class="flex flex-col gap-2">
-          <h2 class="font-bold uppercase">Alt Fire Stats</h2>
+          <h2 class="font-bold uppercase">{m.weapon_stats_title_alt_fire()}</h2>
           <ul
             class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3"
           >
@@ -295,7 +317,7 @@
       {/if}
       {#if data.weapon.stats.damageRanges}
         <section class="flex flex-col gap-2">
-          <h2 class="font-bold uppercase">Damage Ranges</h2>
+          <h2 class="font-bold uppercase">{m.weapon_damages_title()}</h2>
           <ul
             class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3"
           >

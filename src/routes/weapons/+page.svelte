@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 
   const categoryIcons = {
@@ -10,6 +12,16 @@
     Sniper: 'game-icons--reticule',
     Heavy: 'game-icons--minigun',
   };
+
+  const displayCategory = {
+    Melee: m.weapons_categories_melee(),
+    Sidearm: m.weapons_categories_sidearm(),
+    SMG: 'SMG',
+    Shotgun: 'Shotgun',
+    Rifle: 'Rifle',
+    Sniper: 'Sniper',
+    Heavy: 'Heavy Machine Gun',
+  };
 </script>
 
 <main class="px-4 lg:px-12">
@@ -17,7 +29,7 @@
     <h1
       class="text-center text-2xl font-bold uppercase lg:text-3xl lg:font-extrabold"
     >
-      Weapons
+      {m.categories_weapons()}
     </h1>
     <div class="flex flex-wrap justify-center gap-8">
       {#each data.weapons as weapon (weapon.id)}
@@ -45,7 +57,7 @@
               >
                 <span class="mb-0.5 iconify {categoryIcons[weapon.category]}"
                 ></span>
-                {weapon.category}
+                {displayCategory[weapon.category]}
               </figcaption>
             </figure>
             <div class="card-body bg-primary text-primary-content">

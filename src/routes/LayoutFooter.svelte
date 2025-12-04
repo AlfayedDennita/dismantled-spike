@@ -1,5 +1,6 @@
 <script>
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
+  import { m } from '$lib/paraglide/messages';
 
   const { variant } = $props();
 
@@ -43,15 +44,14 @@
         class="flex flex-col items-center gap-2 text-sm text-pretty text-base-content/40 contrast-more:text-base-content md:items-start"
       >
         <p>
-          Copyright &copy; {copyrightYear}. All rights reserved.
+          {@html m.footer_copyright({ year: copyrightYear })}
         </p>
         <p>
-          <b>Dismantled Spike</b> is an unofficial VALORANT wiki and is not directly
-          affiliated to Riot Games.
+          <b>Dismantled Spike</b>
+          {m.footer_description()}
         </p>
         <p>
-          RIOT GAMES, VALORANT, and any associated logos are trademarks, service
-          marks, and/or registered trademarks of Riot Games, Inc.
+          {m.footer_riot_copyright()}
         </p>
       </div>
     </div>
@@ -59,7 +59,7 @@
       class="flex flex-col items-center justify-end gap-1 text-center text-sm text-base-content/40 contrast-more:text-base-content md:w-1/2 md:items-end md:text-right xl:flex-row"
     >
       <p>
-        App Developed by
+        {m.footer_app_developed_by()}
         <a
           class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
           href="https://alfayeddennita.github.io"
@@ -70,7 +70,7 @@
       </p>
       <span class="hidden xl:block">-</span>
       <p>
-        Data Provided by
+        {m.footer_data_provided_by()}
         <a
           class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
           href="https://valorant-api.com"
@@ -82,11 +82,11 @@
       <button
         class="btn mt-2 btn-soft btn-xs xl:mt-0 xl:ml-2"
         type="button"
-        title="Back to Top"
+        title={m.footer_back_to_top()}
         onclick={() => (windowScrollY = 0)}
       >
         <span class="mb-0.5 iconify famicons--arrow-up-sharp"></span>
-        Back to Top
+        {m.footer_back_to_top()}
       </button>
     </aside>
   </div>

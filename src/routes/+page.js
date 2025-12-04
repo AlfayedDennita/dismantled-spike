@@ -4,29 +4,30 @@ import CategoryFlex from '$lib/assets/images/categories/flex.webp';
 import CategoryGunBuddiess from '$lib/assets/images/categories/gun-buddies.webp';
 import CategoryMaps from '$lib/assets/images/categories/maps.webp';
 import CategoryWeapons from '$lib/assets/images/categories/weapons.webp';
+import { m } from '$lib/paraglide/messages';
 
 export function load() {
   const categories = [
     {
-      name: 'Agents',
+      name: m.categories_agents(),
       url: '/agents',
       icon: 'famicons--people-sharp',
       image: CategoryAgents,
     },
     {
-      name: 'Maps',
+      name: m.categories_maps(),
       url: '/maps',
       icon: 'famicons--map-sharp',
       image: CategoryMaps,
     },
     {
-      name: 'Weapons',
+      name: m.categories_weapons(),
       url: '/weapons',
       icon: 'famicons--build-sharp',
       image: CategoryWeapons,
     },
     {
-      name: 'Bundles',
+      name: m.categories_bundles(),
       url: null,
       icon: 'famicons--cube-sharp',
       image: CategoryBundles,

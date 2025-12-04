@@ -4,9 +4,19 @@ import { PUBLIC_VALORANT_API_BASE_URL } from '$env/static/public';
 import devMap from './_dev/map.json' with { type: 'json' };
 import devMaps from './_dev/maps.json' with { type: 'json' };
 
+const languages = {
+  en: 'en-US',
+  id: 'id-ID',
+};
+
 function getMapType(map) {
   let type;
-  const practiceMaps = ['Basic Training', 'The Range'];
+  const practiceMaps = [
+    'Basic Training',
+    'The Range',
+    'Training Dasar',
+    'AREA BERLATIH',
+  ];
 
   if (practiceMaps.includes(map.displayName)) {
     type = 'Practice';
@@ -23,12 +33,12 @@ function getMapType(map) {
   return type;
 }
 
-export async function getAllMaps(fetch) {
+export async function getAllMaps(fetch, lang) {
   let maps;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps?${params.toString()}`
@@ -64,12 +74,12 @@ export async function getAllMaps(fetch) {
   return sortedMaps;
 }
 
-export async function getMapById(fetch, id) {
+export async function getMapById(fetch, id, lang) {
   let map;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps/${id}?${params.toString()}`

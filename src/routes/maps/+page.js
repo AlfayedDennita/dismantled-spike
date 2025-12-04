@@ -1,13 +1,14 @@
 import db from '$lib/db';
+import { m } from '$lib/paraglide/messages.js';
+import { getLocale } from '$lib/paraglide/runtime.js';
 
 export async function load({ fetch, parent }) {
-  const maps = await db.maps.getAll(fetch);
+  const maps = await db.maps.getAll(fetch, getLocale());
   const parentData = await parent();
   const metadata = {
-    title: 'Maps - Dismantled Spike',
-    description:
-      'Each match of VALORANT takes place on a map. There are four map types: standard, team deathmatch, skirmish, and practice. VALORANT uses a deterministic map system in order to increase the variety of maps players will encounter and vastly reduce the possibility of playing on the same map multiple times in a row.',
-    keywords: [...parentData.metadata.keywords, 'maps'],
+    title: `${m.categories_maps()} - Dismantled Spike`,
+    description: m.maps_description(),
+    keywords: [...parentData.metadata.keywords, m.maps_additional_keywords_1()],
   };
 
   return { metadata, maps };

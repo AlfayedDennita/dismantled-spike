@@ -1,16 +1,18 @@
 import db from '$lib/db';
+import { m } from '$lib/paraglide/messages.js';
+import { getLocale } from '$lib/paraglide/runtime.js';
 
 export async function load({ fetch, parent, params }) {
-  const agent = await db.agents.getOneById(fetch, params.id);
+  const agent = await db.agents.getOneById(fetch, params.id, getLocale());
   const parentData = await parent();
   const metadata = {
     title: `${agent.name} - Dismantled Spike`,
     description: agent.description,
     keywords: [
       ...parentData.metadata.keywords,
-      'agent',
-      'character',
-      'hero',
+      m.agent_additional_keywords_1(),
+      m.agent_additional_keywords_2(),
+      m.agent_additional_keywords_3(),
       agent.name,
       agent.role.name,
     ],
@@ -19,7 +21,7 @@ export async function load({ fetch, parent, params }) {
     variant: 'detail',
     backData: {
       url: '/agents',
-      label: 'Back to Agents',
+      label: m.agent_back_to_agents(),
     },
     title: agent.name,
   };

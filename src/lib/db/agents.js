@@ -4,12 +4,17 @@ import { PUBLIC_VALORANT_API_BASE_URL } from '$env/static/public';
 import devAgent from './_dev/agent.json' with { type: 'json' };
 import devAgents from './_dev/agents.json' with { type: 'json' };
 
-export async function getAllAgents(fetch) {
+const languages = {
+  en: 'en-US',
+  id: 'id-ID',
+};
+
+export async function getAllAgents(fetch, lang) {
   let agents;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
       isPlayableCharacter: true,
     });
     const res = await fetch(
@@ -48,12 +53,12 @@ export async function getAllAgents(fetch) {
   return sortedAgents;
 }
 
-export async function getAgentById(fetch, id) {
+export async function getAgentById(fetch, id, lang) {
   let agent;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/agents/${id}?${params.toString()}`

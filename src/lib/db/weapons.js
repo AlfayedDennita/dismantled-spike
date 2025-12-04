@@ -4,12 +4,17 @@ import { PUBLIC_VALORANT_API_BASE_URL } from '$env/static/public';
 import devWeapon from './_dev/weapon.json' with { type: 'json' };
 import devWeapons from './_dev/weapons.json' with { type: 'json' };
 
-export async function getAllWeapons(fetch) {
+const languages = {
+  en: 'en-US',
+  id: 'id-ID',
+};
+
+export async function getAllWeapons(fetch, lang) {
   let weapons;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/weapons?${params.toString()}`
@@ -42,12 +47,12 @@ export async function getAllWeapons(fetch) {
   return sortedWeapons;
 }
 
-export async function getWeaponById(fetch, id) {
+export async function getWeaponById(fetch, id, lang) {
   let weapon;
 
-  if (dev) {
+  if (!dev) {
     const params = new URLSearchParams({
-      language: 'en-US',
+      language: languages[lang] || languages.en,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/weapons/${id}?${params.toString()}`

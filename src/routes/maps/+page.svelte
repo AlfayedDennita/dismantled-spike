@@ -1,4 +1,6 @@
 <script>
+  import { m } from '$lib/paraglide/messages.js';
+
   const { data } = $props();
 
   const typeIcons = {
@@ -7,6 +9,13 @@
     Skirmish: 'famicons--cube-sharp',
     Practice: 'famicons--body-sharp',
   };
+
+  const displayType = {
+    Standard: m.maps_types_standard(),
+    'Team Deathmatch': 'Team Deathmatch',
+    Skirmish: 'Skirmish',
+    Practice: m.maps_types_practice(),
+  };
 </script>
 
 <main class="px-4 lg:px-12">
@@ -14,7 +23,7 @@
     <h1
       class="text-center text-2xl font-bold uppercase lg:text-3xl lg:font-extrabold"
     >
-      Maps
+      {m.categories_maps()}
     </h1>
     <div class="flex flex-wrap justify-center gap-8">
       {#each data.maps as map (map.id)}
@@ -26,7 +35,7 @@
               <img
                 class="aspect-video w-full object-cover object-center brightness-75 transition-all group-hover:scale-125 group-hover:brightness-100 motion-reduce:transition-none contrast-more:brightness-100"
                 src={map.images.splash}
-                alt="{map.name} Splash Art"
+                alt={m.maps_splash_art({ map: map.name })}
               />
               {#if map.sitesDescription}
                 <figcaption
@@ -46,7 +55,7 @@
                 <div class="badge">
                   <span class="mb-0.5 iconify text-xs {typeIcons[map.type]}"
                   ></span>
-                  {map.type}
+                  {displayType[map.type]}
                 </div>
               </div>
             </div>
