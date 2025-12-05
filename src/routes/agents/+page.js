@@ -1,3 +1,4 @@
+import { PUBLIC_APP_ORIGIN_URL } from '$env/static/public';
 import db from '$lib/db';
 import { m } from '$lib/paraglide/messages.js';
 import { getLocale } from '$lib/paraglide/runtime.js';
@@ -14,6 +15,7 @@ export async function load({ fetch, parent }) {
       m.agents_additional_keywords_2(),
       m.agents_additional_keywords_3(),
     ],
+    image: `${PUBLIC_APP_ORIGIN_URL}/images/og/agents.png`,
   };
 
   return { metadata, agents };

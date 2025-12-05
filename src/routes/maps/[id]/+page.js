@@ -18,6 +18,7 @@ export async function load({ fetch, parent, params }) {
       map.name,
       map.type,
     ],
+    image: map.images.splash || parentData.metadata.image,
   };
   const layout = {
     variant: 'detail',

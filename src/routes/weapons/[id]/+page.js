@@ -19,6 +19,7 @@ export async function load({ fetch, parent, params }) {
       weapon.name,
       weapon.category,
     ],
+    image: weapon.images.display || parentData.metadata.image,
   };
   const layout = {
     variant: 'detail',

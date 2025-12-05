@@ -20,6 +20,7 @@ export async function load({ fetch, parent, params }) {
       agent.name,
       agent.role.name,
     ],
+    image: agent.images.portrait || parentData.metadata.image,
   };
   const layout = {
     variant: 'detail',
