@@ -3,7 +3,11 @@ import { m } from '$lib/paraglide/messages.js';
 import { getLocale } from '$lib/paraglide/runtime.js';
 
 export async function load({ fetch, parent, params }) {
-  const agent = await db.agents.getOneById(fetch, params.id, getLocale());
+  const agent = await db.agents.getOneById({
+    fetch,
+    id: params.id,
+    lang: getLocale(),
+  });
   const parentData = await parent();
   const metadata = {
     title: `${agent.name} - Dismantled Spike`,

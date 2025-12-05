@@ -9,7 +9,7 @@ const languages = {
   id: 'id-ID',
 };
 
-export async function getAllAgents(fetch, lang) {
+export async function getAllAgents({ fetch, lang, sitemapData }) {
   let agents;
 
   if (!dev) {
@@ -29,6 +29,24 @@ export async function getAllAgents(fetch, lang) {
     agents = data.data;
   } else {
     agents = devAgents.data;
+  }
+
+  if (sitemapData) {
+    return agents.map((agent) => {
+      const images = [];
+
+      if (agent.fullPortrait) {
+        images.push({
+          url: agent.fullPortrait,
+          title: `${agent.displayName} Portrait`,
+        });
+      }
+
+      return {
+        id: agent.uuid,
+        images,
+      };
+    });
   }
 
   const mappedAgents = agents.map((agent) => ({
@@ -53,7 +71,7 @@ export async function getAllAgents(fetch, lang) {
   return sortedAgents;
 }
 
-export async function getAgentById(fetch, id, lang) {
+export async function getAgentById({ fetch, id, lang }) {
   let agent;
 
   if (!dev) {

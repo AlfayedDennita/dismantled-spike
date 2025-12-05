@@ -33,7 +33,7 @@ function getMapType(map) {
   return type;
 }
 
-export async function getAllMaps(fetch, lang) {
+export async function getAllMaps({ fetch, lang, sitemapData }) {
   let maps;
 
   if (!dev) {
@@ -52,6 +52,31 @@ export async function getAllMaps(fetch, lang) {
     maps = data.data;
   } else {
     maps = devMaps.data;
+  }
+
+  if (sitemapData) {
+    return maps.map((map) => {
+      const images = [];
+
+      if (map.splash) {
+        images.push({
+          url: map.splash,
+          title: `${map.displayName} Splash Art`,
+        });
+      }
+
+      if (map.displayIcon) {
+        images.push({
+          url: map.displayIcon,
+          title: `${map.displayName} Layout`,
+        });
+      }
+
+      return {
+        id: map.uuid,
+        images,
+      };
+    });
   }
 
   // Remove old The Range map
@@ -74,7 +99,7 @@ export async function getAllMaps(fetch, lang) {
   return sortedMaps;
 }
 
-export async function getMapById(fetch, id, lang) {
+export async function getMapById({ fetch, id, lang }) {
   let map;
 
   if (!dev) {

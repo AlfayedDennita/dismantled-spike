@@ -9,7 +9,7 @@ const languages = {
   id: 'id-ID',
 };
 
-export async function getAllWeapons(fetch, lang) {
+export async function getAllWeapons({ fetch, lang, sitemapData }) {
   let weapons;
 
   if (!dev) {
@@ -30,6 +30,24 @@ export async function getAllWeapons(fetch, lang) {
     weapons = devWeapons.data;
   }
 
+  if (sitemapData) {
+    return weapons.map((weapon) => {
+      const images = [];
+
+      if (weapon.displayIcon) {
+        images.push({
+          url: weapon.displayIcon,
+          title: weapon.displayName,
+        });
+      }
+
+      return {
+        id: weapon.uuid,
+        images,
+      };
+    });
+  }
+
   const mappedWeapons = weapons.map((weapon) => ({
     id: weapon.uuid,
     name: weapon.displayName,
@@ -47,7 +65,7 @@ export async function getAllWeapons(fetch, lang) {
   return sortedWeapons;
 }
 
-export async function getWeaponById(fetch, id, lang) {
+export async function getWeaponById({ fetch, id, lang }) {
   let weapon;
 
   if (!dev) {

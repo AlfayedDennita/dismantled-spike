@@ -3,7 +3,7 @@ import { m } from '$lib/paraglide/messages.js';
 import { getLocale } from '$lib/paraglide/runtime.js';
 
 export async function load({ fetch, parent }) {
-  const agents = await db.agents.getAll(fetch, getLocale());
+  const agents = await db.agents.getAll({ fetch, lang: getLocale() });
   const parentData = await parent();
   const metadata = {
     title: `${m.categories_agents()} - Dismantled Spike`,
