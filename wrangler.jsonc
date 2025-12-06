@@ -1,0 +1,9 @@
+{
+  "name": "dismantled-spike",
+  "compatibility_date": "2025-12-06",
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare"
+  }
+}
