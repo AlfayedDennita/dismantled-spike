@@ -1,20 +1,16 @@
 import { error } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 import { PUBLIC_VALORANT_API_BASE_URL } from '$env/static/public';
+import languages from '$lib/utils/languages';
 import devWeapon from './_dev/weapon.json' with { type: 'json' };
 import devWeapons from './_dev/weapons.json' with { type: 'json' };
-
-const languages = {
-  en: 'en-US',
-  id: 'id-ID',
-};
 
 export async function getAllWeapons({ fetch, lang, sitemapData }) {
   let weapons;
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang] || languages.en,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/weapons?${params.toString()}`
@@ -70,7 +66,7 @@ export async function getWeaponById({ fetch, id, lang }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang] || languages.en,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/weapons/${id}?${params.toString()}`

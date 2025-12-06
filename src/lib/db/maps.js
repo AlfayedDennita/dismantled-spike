@@ -34,7 +34,7 @@ export async function getAllMaps({ fetch, lang, sitemapData }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang].apiCode || languages.en.apiCode,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps?${params.toString()}`
@@ -100,7 +100,7 @@ export async function getMapById({ fetch, id, lang }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang].apiCode || languages.en.apiCode,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps/${id}?${params.toString()}`

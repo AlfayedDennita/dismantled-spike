@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { PUBLIC_APP_ORIGIN_URL } from '$env/static/public';
 import db from '$lib/db';
+import { enabledCategories } from '$lib/utils/categories.js';
 
 function createSitemapString(sitemapData) {
   return `
@@ -45,20 +46,15 @@ function createSitemapString(sitemapData) {
 
 export async function GET({ fetch }) {
   const categoriesSitemapData = {};
+  const { home: _home, ...filteredCategories } = enabledCategories;
 
   try {
-    categoriesSitemapData.agents = await db.agents.getAll({
-      fetch,
-      sitemapData: true,
-    });
-    categoriesSitemapData.maps = await db.maps.getAll({
-      fetch,
-      sitemapData: true,
-    });
-    categoriesSitemapData.weapons = await db.weapons.getAll({
-      fetch,
-      sitemapData: true,
-    });
+    for (const category in filteredCategories) {
+      categoriesSitemapData[category] = await db[category].getAll({
+        fetch,
+        sitemapData: true,
+      });
+    }
   } catch (e) {
     console.error(e);
     error(500, 'Failed to load sitemap.');

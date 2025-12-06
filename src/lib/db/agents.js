@@ -10,7 +10,7 @@ export async function getAllAgents({ fetch, lang, sitemapData }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang].apiCode || languages.en.apiCode,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
       isPlayableCharacter: true,
     });
     const res = await fetch(
@@ -69,7 +69,7 @@ export async function getAgentById({ fetch, id, lang }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang].apiCode || languages.en.apiCode,
+      language: languages[lang]?.apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/agents/${id}?${params.toString()}`
