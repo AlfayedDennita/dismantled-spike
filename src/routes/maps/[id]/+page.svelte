@@ -1,40 +1,32 @@
 <script>
   import { m } from '$lib/paraglide/messages.js';
+  import { displayType, typeIcons } from '../utils.js';
 
   const { data } = $props();
-
-  const typeIcons = {
-    Standard: 'famicons--trophy-sharp',
-    'Team Deathmatch': 'famicons--planet-sharp',
-    Skirmish: 'famicons--cube-sharp',
-    Practice: 'famicons--body-sharp',
-  };
-
-  const displayType = {
-    Standard: m.maps_types_standard(),
-    'Team Deathmatch': 'Team Deathmatch',
-    Skirmish: 'Skirmish',
-    Practice: m.maps_types_practice(),
-  };
 </script>
 
-<main class="lg:px-12">
+<main class="sm:px-4 lg:px-12">
   <div
-    class="mx-auto flex max-w-7xl flex-col md:gap-4 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:py-16"
+    class="mx-auto flex max-w-7xl flex-col md:gap-8 lg:flex-row lg:items-start lg:py-16"
   >
-    <img
-      class="aspect-video w-full object-cover object-center lg:w-5/12"
-      src={data.map.images.splash}
-      alt={m.maps_splash_art({ map: data.map.name })}
-    />
+    <figure
+      class="flex items-center justify-center bg-base-200 sm:mt-8 lg:mt-0 lg:w-5/12"
+    >
+      <img
+        class="aspect-video w-full object-cover object-center sm:max-w-2xl"
+        src={data.map.images.splash}
+        alt={m.maps_splash_art({ map: data.map.name })}
+        loading="lazy"
+      />
+    </figure>
     <section
-      class="flex flex-col gap-4 px-4 py-8 md:mx-4 md:bg-base-200 md:p-8 lg:mx-0 lg:w-7/12"
+      class="flex flex-col gap-4 px-4 py-8 sm:px-0 md:mb-8 md:bg-base-200 md:p-8 lg:mb-0 lg:w-7/12"
     >
       <header class="flex flex-col gap-2">
         <div class="flex flex-wrap items-center gap-2">
           <h1 class="text-2xl font-extrabold">{data.map.name}</h1>
           <div class="badge gap-1 badge-primary">
-            <span class="mb-0.5 iconify {typeIcons[data.map.type]}"></span>
+            <span class="mb-0.5 {typeIcons[data.map.type]}"></span>
             {displayType[data.map.type]}
           </div>
         </div>
@@ -50,7 +42,12 @@
       {#if data.map.images.layout}
         <section class="flex flex-col gap-2">
           <h2 class="font-bold uppercase">{m.map_layout()}</h2>
-          <img src={data.map.images.layout} alt="{data.map.name} Layout" />
+          <img
+            class="aspect-square w-full object-contain object-center sm:max-w-sm"
+            src={data.map.images.layout}
+            alt="{data.map.name} Layout"
+            loading="lazy"
+          />
         </section>
       {/if}
       {#if data.map.callouts}
@@ -64,10 +61,10 @@
                   open={i === 0}
                 >
                   <summary
-                    class="collapse-title flex items-center gap-2 font-bold text-primary-content"
+                    class="collapse-title flex items-center gap-2 text-primary-content"
                     title={superRegion}
                   >
-                    {superRegion}
+                    <h3 class="font-bold">{superRegion}</h3>
                   </summary>
                   <div
                     class="collapse-content bg-base-200 p-4 text-sm md:bg-base-300"

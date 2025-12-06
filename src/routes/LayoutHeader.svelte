@@ -4,6 +4,9 @@
   import BrandIcon from '$lib/assets/images/brand/icon.svg';
   import { m } from '$lib/paraglide/messages';
   import { getLocale, setLocale } from '$lib/paraglide/runtime';
+  import { enabledCategories } from '$lib/utils/categories';
+  import languages from '$lib/utils/languages';
+  import themes from '$lib/utils/themes';
 
   let { id, variant, backData, detailTitle, children } = $props();
 
@@ -32,78 +35,21 @@
     isSearchSidebarShown = false;
   });
 
-  const defaultCategories = [
-    {
-      name: m.categories_agents(),
-      url: '/agents',
-      icon: 'famicons--people-sharp',
-    },
-    {
-      name: m.categories_maps(),
-      url: '/maps',
-      icon: 'famicons--map-sharp',
-    },
-    {
-      name: m.categories_weapons(),
-      url: '/weapons',
-      icon: 'famicons--build-sharp',
-    },
-  ];
-
-  const categories = $derived.by(() => {
-    let computedCategories = defaultCategories;
-
+  const { home: _home, ...filteredCategories } = enabledCategories;
+  const displayCategories = $derived.by(() => {
     if (variant === 'detail' && windowInnerWidth < 1024) {
-      computedCategories = [
-        {
-          name: m.categories_home(),
-          url: '/',
-          icon: 'famicons--home-sharp',
-        },
-        ...computedCategories,
-      ];
+      return enabledCategories;
+    } else {
+      return filteredCategories;
     }
-
-    return computedCategories;
   });
-  const themes = [
-    {
-      id: 'light',
-      name: m.header_themes_light(),
-      icon: 'famicons--sunny-sharp',
-    },
-    {
-      id: 'dark',
-      name: m.header_themes_dark(),
-      icon: 'famicons--moon-sharp',
-    },
-    {
-      id: null,
-      name: m.header_themes_system(),
-      icon: 'famicons--desktop-sharp',
-    },
-  ];
-  const languages = [
-    {
-      id: 'en',
-      name: 'English',
-      icon: 'circle-flags--gb',
-    },
-    {
-      id: 'id',
-      name: 'Bahasa Indonesia',
-      icon: 'circle-flags--id',
-    },
-  ];
 
   let activeThemeId = $state();
   let activeLanguageId = $state();
   const activeTheme = $derived(
-    themes.find((theme) => theme.id === activeThemeId)
+    themes[activeThemeId !== null ? activeThemeId : 'system']
   );
-  const activeLanguage = $derived(
-    languages.find((language) => language.id === activeLanguageId)
-  );
+  const activeLanguage = $derived(languages[activeLanguageId]);
   let searchQuery = $state('');
 
   function handleRefreshingTheme({ detail: { localStorageTheme } }) {
@@ -124,6 +70,118 @@
 
 <svelte:window bind:innerWidth={windowInnerWidth} />
 
+{#snippet openSidebarButton({ controls, expanded, label, onclick, icon })}
+  <button
+    class={[
+      'btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden',
+      variant === 'home' && 'bg-transparent hover:bg-primary-content/20',
+    ]}
+    type="button"
+    aria-controls={controls}
+    aria-expanded={expanded}
+    aria-label={label}
+    title={label}
+    {onclick}
+  >
+    <span
+      class={[`text-3xl ${icon}`, variant === 'home' && 'text-primary-content']}
+    ></span>
+  </button>
+{/snippet}
+
+{#snippet closeSidebarButton({ title, onclick, text })}
+  <button
+    class="btn min-h-16 justify-start border-b-2 border-b-base-content/5 text-left"
+    type="button"
+    {title}
+    {onclick}
+  >
+    <span class="mb-1 iconify text-lg famicons--close-sharp"></span>
+    {text}
+  </button>
+{/snippet}
+
+{#snippet mobileDropdown({
+  title,
+  activeIcon,
+  activeTitle,
+  activeOption,
+  options,
+  onclickOption,
+})}
+  <li>
+    <details>
+      <summary class="p-4" {title}>
+        <span class="mb-1 {activeIcon}"></span>
+        <span>
+          <b>{activeTitle}:</b>
+          {activeOption || `${m.general_loading()} ....`}
+        </span>
+      </summary>
+      <ul>
+        {#each Object.entries(options) as [optionId, option] (optionId)}
+          <li>
+            <button
+              class="p-4"
+              type="button"
+              title={option.name}
+              onclick={() => onclickOption(optionId)}
+            >
+              <span class="mb-1 {option.icon}"></span>
+              {option.name}
+            </button>
+          </li>
+        {/each}
+      </ul>
+    </details>
+  </li>
+{/snippet}
+
+{#snippet desktopDropdown({
+  title,
+  activeIcon,
+  activeTitle,
+  activeOption,
+  options,
+  onclickOption,
+})}
+  <li class="dropdown dropdown-end">
+    <div
+      class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
+      role="button"
+      tabindex="0"
+      {title}
+    >
+      <span class="mb-1 {activeIcon}"></span>
+      <span>
+        <b>{activeTitle}:</b>
+        {activeOption || `${m.general_loading()} ....`}
+      </span>
+    </div>
+    <ul
+      class="dropdown-content menu bg-base-300 text-base-content"
+      tabindex="-1"
+    >
+      {#each Object.entries(options) as [optionId, option] (optionId)}
+        <li>
+          <button
+            class="gap-1 px-2 text-nowrap hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
+            type="button"
+            title={option.name}
+            onclick={() => {
+              onclickOption(optionId);
+              document.activeElement.blur();
+            }}
+          >
+            <span class="mb-1 {option.icon}"></span>
+            {option.name}
+          </button>
+        </li>
+      {/each}
+    </ul>
+  </li>
+{/snippet}
+
 <div class={['drawer', variant === 'detail' && 'drawer-end']}>
   <input
     class="drawer-toggle invisible"
@@ -140,32 +198,29 @@
         bind:checked={isSearchSidebarShown}
       />
       <div
-        class="drawer-content flex min-h-dvh flex-col"
+        class="relative drawer-content flex min-h-dvh flex-col"
         inert={isMenuSidebarShown || isSearchSidebarShown}
       >
         <header
-          class={[
-            '@container p-0 max-lg:navbar lg:bg-base-200 lg:text-base-content',
-            variant === 'home' && 'bg-primary text-primary-content',
-          ]}
+          class="@container sticky inset-x-0 top-0 z-40 p-0 shadow-sm max-lg:navbar lg:static lg:bg-base-200 lg:text-base-content lg:shadow-none {variant ===
+          'home'
+            ? 'bg-primary text-primary-content'
+            : 'bg-base-100'}"
         >
           <div
-            class="max-lg:navbar-start lg:bg-primary lg:text-primary-content"
+            class={[
+              'max-lg:navbar-start lg:bg-primary lg:text-primary-content',
+              variant === 'detail' && 'w-auto',
+            ]}
           >
             {#if variant === 'home'}
-              <button
-                class="btn btn-square h-16 border-none bg-transparent btn-ghost btn-xl hover:bg-primary-content/20 lg:hidden"
-                type="button"
-                aria-controls="{id}-menu-sidebar-checkbox"
-                aria-expanded={isMenuSidebarShown}
-                aria-label={menuSidebarToggleLabel}
-                title={menuSidebarToggleLabel}
-                onclick={() => (isMenuSidebarShown = true)}
-              >
-                <span
-                  class="iconify text-3xl text-primary-content famicons--menu-sharp"
-                ></span>
-              </button>
+              {@render openSidebarButton({
+                controls: `${id}-menu-sidebar-checkbox`,
+                expanded: isMenuSidebarShown,
+                label: menuSidebarToggleLabel,
+                onclick: () => (isMenuSidebarShown = true),
+                icon: 'iconify famicons--menu-sharp',
+              })}
             {:else}
               <a
                 class="btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden"
@@ -176,20 +231,21 @@
                 <span class="iconify text-3xl famicons--arrow-back-sharp"
                 ></span>
               </a>
+              <div class="hidden size-16 @sm:block" aria-hidden="true"></div>
             {/if}
             <div
               class="mx-auto hidden w-full max-w-324 lg:flex lg:justify-between lg:gap-4"
             >
               <nav aria-label={m.header_desktop_navigation()}>
                 <ul class="menu menu-horizontal p-0">
-                  {#each categories as category (category.name)}
+                  {#each Object.entries(filteredCategories) as [categoryId, category] (categoryId)}
                     <li>
                       <a
                         class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
                         href={category.url}
                         title={category.name}
                       >
-                        <span class={['mb-1 iconify', category.icon]}></span>
+                        <span class="mb-1 {category.icon}"></span>
                         {category.name}
                       </a>
                     </li>
@@ -197,87 +253,26 @@
                 </ul>
               </nav>
               <ul class="menu menu-horizontal p-0">
-                <li class="dropdown dropdown-end">
-                  <div
-                    class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
-                    role="button"
-                    tabindex="0"
-                    title={m.header_themes_choose()}
-                  >
-                    <span
-                      class={[
-                        'mb-1 iconify',
-                        activeTheme?.icon || 'famicons--square-sharp',
-                      ]}
-                    ></span>
-                    <span>
-                      <b>{m.header_themes_title()}:</b>
-                      {activeTheme?.name || `${m.general_loading()} ....`}
-                    </span>
-                  </div>
-                  <ul
-                    class="dropdown-content menu bg-base-300 text-base-content"
-                    tabindex="-1"
-                  >
-                    {#each themes as theme (theme.name)}
-                      <li>
-                        <button
-                          class="gap-1 px-2 text-nowrap hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
-                          type="button"
-                          title={theme.name}
-                          onclick={() => {
-                            window.theme.theme = theme.id;
-                            document.activeElement.blur();
-                          }}
-                        >
-                          <span class={['mb-1 iconify', theme.icon]}></span>
-                          {theme.name}
-                        </button>
-                      </li>
-                    {/each}
-                  </ul>
-                </li>
-                <li class="dropdown dropdown-end">
-                  <div
-                    class="gap-1 px-2 hover:bg-primary-content/20 focus:bg-primary-content/40 focus:text-primary-content active:bg-primary-content/40"
-                    role="button"
-                    tabindex="0"
-                    title={m.header_languages_choose()}
-                  >
-                    <span
-                      class={[
-                        'mb-1 iconify-color',
-                        activeLanguage?.icon || 'circle-flags--xx',
-                      ]}
-                    ></span>
-                    <span>
-                      <b>{m.header_languages_title()}:</b>
-                      {activeLanguage?.name || `${m.general_loading()} ....`}
-                    </span>
-                  </div>
-                  <ul
-                    class="dropdown-content menu bg-base-300 text-base-content"
-                    tabindex="-1"
-                  >
-                    {#each languages as language (language.name)}
-                      <li>
-                        <button
-                          class="gap-1 px-2 text-nowrap hover:bg-base-content/5 focus:bg-base-content/10 active:bg-primary-content/10"
-                          type="button"
-                          title={language.name}
-                          onclick={() => {
-                            setLocale(language.id);
-                            document.activeElement.blur();
-                          }}
-                        >
-                          <span class={['mb-1 iconify-color', language.icon]}
-                          ></span>
-                          {language.name}
-                        </button>
-                      </li>
-                    {/each}
-                  </ul>
-                </li>
+                {@render desktopDropdown({
+                  title: m.header_themes_choose(),
+                  activeIcon:
+                    activeTheme?.icon || 'iconify famicons--square-sharp',
+                  activeTitle: m.header_themes_title(),
+                  activeOption: activeTheme?.name,
+                  options: themes,
+                  onclickOption: (themeId) =>
+                    (window.theme.theme =
+                      themeId !== 'system' ? themeId : null),
+                })}
+                {@render desktopDropdown({
+                  title: m.header_languages_choose(),
+                  activeIcon:
+                    activeLanguage?.icon || 'iconify-color circle-flags--xx',
+                  activeTitle: m.header_languages_title(),
+                  activeOption: activeLanguage?.name,
+                  options: languages,
+                  onclickOption: (languageId) => setLocale(languageId),
+                })}
               </ul>
             </div>
           </div>
@@ -285,7 +280,12 @@
             <div
               class="w-full justify-between max-lg:contents lg:hero-content lg:max-w-7xl lg:gap-4 lg:px-0 lg:py-8 xl:py-10"
             >
-              <div class="max-lg:navbar-center">
+              <div
+                class={[
+                  'max-lg:navbar-center',
+                  variant === 'detail' && 'w-full flex-1',
+                ]}
+              >
                 <a
                   class={[
                     'flex items-center gap-2 lg:gap-4',
@@ -296,8 +296,7 @@
                 >
                   <span
                     class="aspect-689/1024 h-6 bg-primary-content lg:h-8 lg:bg-base-content"
-                    style:mask={`url("${BrandIcon}") no-repeat
-                    center`}
+                    style:mask={`url("${BrandIcon}") no-repeat center`}
                   ></span>
                   <svelte:element
                     this={page.url.pathname === '/' ? 'h1' : 'h2'}
@@ -313,44 +312,31 @@
                   </svelte:element>
                 </a>
                 {#if variant === 'detail'}
-                  <h2 class="font-extrabold uppercase lg:hidden">
+                  <h2
+                    class="line-clamp-1 w-full text-center font-extrabold text-ellipsis uppercase lg:hidden"
+                  >
                     {detailTitle}
                   </h2>
                 {/if}
               </div>
-              <div class="max-lg:navbar-end">
-                <button
-                  class={[
-                    'btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden',
-                    variant === 'home' &&
-                      'bg-transparent hover:bg-primary-content/20',
-                  ]}
-                  type="button"
-                  aria-controls="{id}-search-sidebar-checkbox"
-                  aria-expanded={isSearchSidebarShown}
-                  aria-label={searchSidebarToggleLabel}
-                  title={searchSidebarToggleLabel}
-                  onclick={() => (isSearchSidebarShown = true)}
-                >
-                  <span
-                    class={[
-                      'iconify text-3xl famicons--search-sharp',
-                      variant === 'home' && 'text-primary-content',
-                    ]}
-                  ></span>
-                </button>
+              <div
+                class={['max-lg:navbar-end', variant === 'detail' && 'w-auto']}
+              >
+                {@render openSidebarButton({
+                  controls: `${id}-search-sidebar-checkbox`,
+                  expanded: isSearchSidebarShown,
+                  label: searchSidebarToggleLabel,
+                  onclick: () => (isSearchSidebarShown = true),
+                  icon: 'iconify famicons--search-sharp',
+                })}
                 {#if variant === 'detail'}
-                  <button
-                    class="btn btn-square h-16 border-none btn-ghost btn-xl lg:hidden"
-                    type="button"
-                    aria-controls="{id}-menu-sidebar-checkbox"
-                    aria-expanded={isMenuSidebarShown}
-                    aria-label={menuSidebarToggleLabel}
-                    title={menuSidebarToggleLabel}
-                    onclick={() => (isMenuSidebarShown = true)}
-                  >
-                    <span class="iconify text-3xl famicons--menu-sharp"></span>
-                  </button>
+                  {@render openSidebarButton({
+                    controls: `${id}-menu-sidebar-checkbox`,
+                    expanded: isMenuSidebarShown,
+                    label: menuSidebarToggleLabel,
+                    onclick: () => (isMenuSidebarShown = true),
+                    icon: 'iconify famicons--menu-sharp',
+                  })}
                 {/if}
                 <label
                   class="input input-lg hidden w-full min-w-md bg-base-300 lg:flex"
@@ -359,7 +345,7 @@
                   <span class="iconify famicons--search-sharp"></span>
                   <input
                     type="search"
-                    name="{id}-search-mobile"
+                    name="{id}-search-desktop"
                     placeholder="{m.header_search_placeholder()} ...."
                     bind:value={searchQuery}
                   />
@@ -370,7 +356,7 @@
         </header>
         {@render children?.()}
       </div>
-      <div class="drawer-side">
+      <div class="drawer-side z-50">
         <label
           class="drawer-overlay cursor-default"
           for="{id}-search-sidebar-checkbox"
@@ -380,16 +366,11 @@
         <div
           class="flex min-h-full w-full max-w-160 flex-col gap-6 bg-base-200"
         >
-          <button
-            class="btn min-h-16 justify-start border-b-2 border-b-base-content/5 text-left"
-            type="button"
-            title={searchSidebarToggleLabel}
-            onclick={() => (isSearchSidebarShown = false)}
-          >
-            <span class="mb-1 iconify text-lg famicons--close-sharp"></span>
-            {m.general_close()}
-            {m.header_search_title()}
-          </button>
+          {@render closeSidebarButton({
+            title: searchSidebarToggleLabel,
+            onclick: () => (isSearchSidebarShown = false),
+            text: `${m.general_close()} ${m.header_search_title()}`,
+          })}
           <div class="px-4">
             <label
               class="input input-lg w-full bg-transparent"
@@ -408,7 +389,7 @@
       </div>
     </div>
   </div>
-  <div class="drawer-side">
+  <div class="drawer-side z-50">
     <label
       class="drawer-overlay cursor-default"
       for="{id}-menu-sidebar-checkbox"
@@ -416,23 +397,19 @@
     >
     </label>
     <div class="flex min-h-full w-full max-w-160 flex-col gap-6 bg-base-200">
-      <button
-        class="btn min-h-16 justify-start border-b-2 border-b-base-content/5 text-left"
-        type="button"
-        title={menuSidebarToggleLabel}
-        onclick={() => (isMenuSidebarShown = false)}
-      >
-        <span class="mb-1 iconify text-lg famicons--close-sharp"></span>
-        {m.general_close()} Menu
-      </button>
+      {@render closeSidebarButton({
+        title: menuSidebarToggleLabel,
+        onclick: () => (isMenuSidebarShown = false),
+        text: `${m.general_close()} Menu`,
+      })}
       <div class="flex flex-col gap-2">
         <h3 class="px-4 text-sm font-bold uppercase">{m.categories_title()}</h3>
         <nav aria-label={m.header_mobile_navigation()}>
           <ul class="menu w-full bg-base-300 p-0">
-            {#each categories as category (category.name)}
+            {#each Object.entries(displayCategories) as [categoryId, category] (categoryId)}
               <li>
                 <a class="p-4" href={category.url} title={category.name}>
-                  <span class={['mb-1 iconify', category.icon]}></span>
+                  <span class="mb-1 {category.icon}"></span>
                   {category.name}
                 </a>
               </li>
@@ -445,69 +422,24 @@
           {m.header_settings()}
         </h3>
         <ul class="menu w-full bg-base-300 p-0">
-          <li>
-            <details>
-              <summary class="p-4" title={m.header_themes_choose()}>
-                <span
-                  class={[
-                    'mb-1 iconify',
-                    activeTheme?.icon || 'famicons--square-sharp',
-                  ]}
-                ></span>
-                <span>
-                  <b>Theme:</b>
-                  {activeTheme?.name || `${m.general_loading()} ....`}
-                </span>
-              </summary>
-              <ul>
-                {#each themes as theme (theme.name)}
-                  <li>
-                    <button
-                      class="p-4"
-                      type="button"
-                      title={theme.name}
-                      onclick={() => (window.theme.theme = theme.id)}
-                    >
-                      <span class={['mb-1 iconify', theme.icon]}></span>
-                      {theme.name}
-                    </button>
-                  </li>
-                {/each}
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details>
-              <summary class="p-4" title={m.header_languages_choose()}>
-                <span
-                  class={[
-                    'mb-1 iconify-color',
-                    activeLanguage?.icon || 'circle-flags--xx',
-                  ]}
-                ></span>
-                <span>
-                  <b>{m.header_languages_title()}:</b>
-                  {activeLanguage?.name || `${m.general_loading()} ....`}
-                </span>
-              </summary>
-              <ul>
-                {#each languages as language (language.name)}
-                  <li>
-                    <button
-                      class="p-4"
-                      type="button"
-                      title={language.name}
-                      onclick={() => setLocale(language.id)}
-                    >
-                      <span class={['mb-1 iconify-color', language.icon]}
-                      ></span>
-                      {language.name}
-                    </button>
-                  </li>
-                {/each}
-              </ul>
-            </details>
-          </li>
+          {@render mobileDropdown({
+            title: m.header_themes_choose(),
+            activeIcon: activeTheme?.icon || 'iconify famicons--square-sharp',
+            activeTitle: m.header_themes_title(),
+            activeOption: activeTheme?.name,
+            options: themes,
+            onclickOption: (themeId) =>
+              (window.theme.theme = themeId !== 'system' ? themeId : null),
+          })}
+          {@render mobileDropdown({
+            title: m.header_languages_choose(),
+            activeIcon:
+              activeLanguage?.icon || 'iconify-color circle-flags--xx',
+            activeTitle: m.header_languages_title(),
+            activeOption: activeLanguage?.name,
+            options: languages,
+            onclickOption: (languageId) => setLocale(languageId),
+          })}
         </ul>
       </div>
     </div>

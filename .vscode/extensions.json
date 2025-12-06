@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "svelte.svelte-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "romerramos.elementarywatson"
+  ],
+  "unwantedRecommendations": ["inlang.vs-code-extension"]
+}

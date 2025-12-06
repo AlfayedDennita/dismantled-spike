@@ -1,13 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 import { PUBLIC_VALORANT_API_BASE_URL } from '$env/static/public';
+import languages from '$lib/utils/languages';
 import devMap from './_dev/map.json' with { type: 'json' };
 import devMaps from './_dev/maps.json' with { type: 'json' };
-
-const languages = {
-  en: 'en-US',
-  id: 'id-ID',
-};
 
 function getMapType(map) {
   let type;
@@ -24,7 +20,7 @@ function getMapType(map) {
     if (map.tacticalDescription) {
       type = 'Standard';
     } else {
-      type = 'Team Deathmatch';
+      type = 'TeamDeathmatch';
     }
   } else {
     type = 'Skirmish';
@@ -38,7 +34,7 @@ export async function getAllMaps({ fetch, lang, sitemapData }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang] || languages.en,
+      language: languages[lang].apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps?${params.toString()}`
@@ -104,7 +100,7 @@ export async function getMapById({ fetch, id, lang }) {
 
   if (!dev) {
     const params = new URLSearchParams({
-      language: languages[lang] || languages.en,
+      language: languages[lang].apiCode || languages.en.apiCode,
     });
     const res = await fetch(
       `${PUBLIC_VALORANT_API_BASE_URL}/maps/${id}?${params.toString()}`

@@ -25,7 +25,7 @@ export async function load({ fetch, parent, params }) {
     variant: 'detail',
     backData: {
       url: '/weapons',
-      label: m.weapon_back_to_agents(),
+      label: m.weapon_back_to_weapons(),
     },
     title: weapon.name,
   };

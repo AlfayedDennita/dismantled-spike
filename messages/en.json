@@ -6,10 +6,12 @@
   "app_additional_keywords_1": "game",
   "app_additional_keywords_2": "guide",
 
+  "general_error": "Error",
   "general_loading": "Loading",
   "general_open": "Open",
   "general_close": "Close",
   "general_back": "Back",
+  "general_coming_soon": "Coming Soon",
 
   "categories_title": "Categories",
   "categories_home": "Home",
@@ -17,7 +19,6 @@
   "categories_maps": "Maps",
   "categories_weapons": "Weapons",
   "categories_bundles": "Bundles",
-  "categories_coming_soon": "Coming Soon",
 
   "header_themes_title": "Theme",
   "header_themes_light": "Light",
@@ -41,6 +42,8 @@
 
   "home_recent_visits_title": "Your Recent Visits",
 
+  "error_back_to_home": "Back to Home",
+
   "agents_description": "Agents are the playable characters in VALORANT, representing an agent of the VALORANT protocol. Each agent serves as a different role or class with four unique abilities. There are four roles/classes: duelist, initiator, controller, and sentinel.",
   "agents_additional_keywords_1": "agents",
   "agents_additional_keywords_2": "characters",
@@ -50,7 +53,7 @@
   "agent_additional_keywords_1": "agent",
   "agent_additional_keywords_2": "character",
   "agent_additional_keywords_3": "hero",
-  "agent_back_to_agents": "Back to Agents",
+  "agent_back_to_agents": "Back to All Agents",
   "agent_passive": "Passive",
   "agent_ultimate": "Ultimate",
   "agent_code_name": "Code Name",
@@ -64,7 +67,7 @@
 
   "map_type": "Type",
   "map_additional_keywords_1": "map",
-  "map_back_to_agents": "Back to Maps",
+  "map_back_to_maps": "Back to All Maps",
   "map_coordinates": "Coordinates",
   "map_layout": "Layout",
   "map_callouts": "Callouts",
@@ -77,7 +80,7 @@
 
   "weapon_category": "Category",
   "weapon_additional_keywords_1": "weapon",
-  "weapon_back_to_agents": "Back to Weapons",
+  "weapon_back_to_weapons": "Back to All Weapons",
   "weapon_cost_title": "Cost",
   "weapon_cost_credit": "Credit",
   "weapon_cost_credits": "Credits",

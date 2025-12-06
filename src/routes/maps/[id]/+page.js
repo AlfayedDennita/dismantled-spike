@@ -24,7 +24,7 @@ export async function load({ fetch, parent, params }) {
     variant: 'detail',
     backData: {
       url: '/maps',
-      label: m.map_back_to_agents(),
+      label: m.map_back_to_maps(),
     },
     title: map.name,
   };

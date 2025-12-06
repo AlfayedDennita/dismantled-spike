@@ -16,6 +16,18 @@
 
 <svelte:window bind:scrollY={windowScrollY} />
 
+{#snippet externalLink(url, text)}
+  <a
+    class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
+    href={url}
+    rel="external"
+    target="_blank"
+    title={text}
+  >
+    {text}
+  </a>
+{/snippet}
+
 <footer
   class={[
     'mt-auto bg-base-200 p-8 text-base-content md:py-12 lg:px-12',
@@ -31,8 +43,7 @@
       <div class="flex items-center gap-2 select-none md:gap-4">
         <span
           class="aspect-689/1024 h-6 bg-base-content/30 contrast-more:bg-base-content"
-          style:mask={`url("${BrandIcon}") no-repeat
-          center`}
+          style:mask={`url("${BrandIcon}") no-repeat center`}
         ></span>
         <h3
           class="font-brand text-2xl text-base-content/30 contrast-more:text-base-content"
@@ -60,24 +71,15 @@
     >
       <p>
         {m.footer_app_developed_by()}
-        <a
-          class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
-          href="https://alfayeddennita.github.io"
-          rel="external"
-          target="_blank"
-          title="Alfayed Dennita">Alfayed Dennita</a
-        >
+        {@render externalLink(
+          'https://alfayeddennita.github.io',
+          'Alfayed Dennita'
+        )}
       </p>
       <span class="hidden xl:block">-</span>
       <p>
         {m.footer_data_provided_by()}
-        <a
-          class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
-          href="https://valorant-api.com"
-          rel="external"
-          target="_blank"
-          title="Valorant-API">Valorant-API</a
-        >
+        {@render externalLink('https://valorant-api.com', 'Valorant-API')}
       </p>
       <button
         class="btn mt-2 btn-soft btn-xs xl:mt-0 xl:ml-2"

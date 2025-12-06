@@ -21,28 +21,29 @@
   };
 </script>
 
-<main class="lg:px-12">
+<main class="sm:px-4 lg:px-12">
   <div
-    class="mx-auto flex max-w-7xl flex-col md:gap-4 md:pb-8 lg:flex-row lg:items-start lg:gap-8 lg:py-16"
+    class="mx-auto flex max-w-7xl flex-col md:gap-8 lg:flex-row lg:items-start lg:py-16"
   >
-    <div
-      class="relative flex items-center justify-center bg-base-200 p-4 lg:w-4/12"
+    <figure
+      class="relative flex items-center justify-center bg-base-200 p-4 sm:mt-8 lg:mt-0 lg:w-4/12"
     >
       <img
-        class="size-full object-contain object-center"
+        class="aspect-512/465 w-full object-contain object-center sm:w-6/12 md:w-4/12 lg:w-full"
         src={data.agent.images.portrait}
         alt={m.agents_portrait({ agent: data.agent.name })}
+        loading="lazy"
       />
       <div
-        class="absolute top-4 right-4 aspect-175/256 w-1/5"
+        class="absolute top-4 right-4 aspect-175/256 w-1/5 sm:w-2/12 md:w-[10%] lg:w-1/5"
         style:background="linear-gradient(to bottom, {stringBackgroundGradientColors})"
         style:mask="url('{data.agent.images.background}') no-repeat center"
         style:mask-size="100%"
         aria-hidden="true"
       ></div>
-    </div>
+    </figure>
     <section
-      class="flex flex-col gap-4 px-4 py-8 md:mx-4 md:bg-base-200 md:p-8 lg:mx-0 lg:w-8/12"
+      class="flex flex-col gap-4 px-4 py-8 sm:px-0 md:mb-8 md:bg-base-200 md:p-8 lg:mb-0 lg:w-8/12"
     >
       <header class="flex flex-col gap-2">
         <div class="flex flex-wrap items-center gap-2">
@@ -53,6 +54,7 @@
                 class="mb-0.5 size-3 object-contain object-center"
                 src={data.agent.role.icon}
                 alt={data.agent.role.name}
+                loading="lazy"
               />
               {data.agent.role.name}
             </div>
@@ -81,16 +83,19 @@
                 open={i === 0}
               >
                 <summary
-                  class="collapse-title flex items-center gap-2 font-bold text-primary-content"
+                  class="collapse-title flex items-center gap-2 text-primary-content"
                   title={ability.name}
                 >
                   <img
                     class="mb-1 size-4 object-contain object-center"
                     src={ability.icon}
                     alt={ability.name}
+                    loading="lazy"
                   />
-                  {ability.name}
-                  [{abilitiesInfo[ability.slot]}]
+                  <h3 class="font-bold">
+                    {ability.name}
+                    [{abilitiesInfo[ability.slot]}]
+                  </h3>
                 </summary>
                 <div
                   class="collapse-content bg-base-200 p-4 text-sm md:bg-base-300"

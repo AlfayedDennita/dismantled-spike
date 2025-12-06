@@ -6,10 +6,12 @@
   "app_additional_keywords_1": "permainan",
   "app_additional_keywords_2": "panduan",
 
+  "general_error": "Kesalahan",
   "general_loading": "Memuat",
   "general_open": "Buka",
   "general_close": "Tutup",
   "general_back": "Kembali",
+  "general_coming_soon": "Segera Hadir",
 
   "categories_title": "Kategori",
   "categories_home": "Beranda",
@@ -17,7 +19,6 @@
   "categories_maps": "Peta",
   "categories_weapons": "Senjata",
   "categories_bundles": "Bundel",
-  "categories_coming_soon": "Segera Hadir",
 
   "header_themes_title": "Tema",
   "header_themes_light": "Terang",
@@ -35,11 +36,13 @@
   "footer_copyright": "Hak cipta &copy; {year}. Semua hak dilindungi undang-undang.",
   "footer_description": "adalah sebuah wiki VALORANT tidak resmi dan tidak terafiliasi secara langsung dengan Riot Games.",
   "footer_riot_copyright": "RIOT GAMES, VALORANT, dan semua logo terkait adalah merek dagang, merek layanan, dan/atau merek dagang terdaftar Riot Games, Inc.",
-  "footer_app_developed_by": "Apl Dikembangkan oleh",
-  "footer_data_provided_by": "Data Disediakan oleh",
+  "footer_app_developed_by": "Pengembang:",
+  "footer_data_provided_by": "Sumber Data:",
   "footer_back_to_top": "Kembali ke Atas",
 
   "home_recent_visits_title": "Kunjungan Terakhirmu",
+
+  "error_back_to_home": "Kembali ke Beranda",
 
   "agents_description": "Agen adalah karakter yang dapat dimainkan di VALORANT, merepresentasikan seorang agen dari protokol VALORANT. Masing-masing agen memiliki sebuah peran atau kelas dengan empat kemampuan yang unik. Terdapat empat peran/kelas: duelist, initiator, controller, dan sentinel.",
   "agents_additional_keywords_1": "agen",
@@ -50,13 +53,13 @@
   "agent_additional_keywords_1": "agen",
   "agent_additional_keywords_2": "karakter",
   "agent_additional_keywords_3": "pahlawan",
-  "agent_back_to_agents": "Kembali ke Agen",
+  "agent_back_to_agents": "Kembali ke Seluruh Agen",
   "agent_passive": "Pasif",
   "agent_ultimate": "Ultima",
   "agent_code_name": "Nama Kode",
   "agent_abilities": "Kemampuan",
 
-  "maps_description": "Setiap pertandingan di VALORANT berlangsung di sebuah peta. Terdapat empat tipe peta: standard, team deathmatch, skirmish, dan practice. VALORANT menggunakan sistem peta deterministik untuk meningkatkan variasi dari peta yang akan ditemui pemain dan sangat mengurangi kemungkinan untuk bermain di peta yang sama berulang kali.",
+  "maps_description": "Setiap pertandingan di VALORANT berlangsung di sebuah peta. Terdapat empat tipe peta: standar, team deathmatch, skirmish, dan latihan. VALORANT menggunakan sistem peta deterministik untuk meningkatkan variasi dari peta yang akan ditemui pemain dan sangat mengurangi kemungkinan untuk bermain di peta yang sama berulang kali.",
   "maps_additional_keywords_1": "peta",
   "maps_splash_art": "Gambar Splash {map}",
   "maps_types_standard": "Standar",
@@ -64,7 +67,7 @@
 
   "map_type": "Jenis",
   "map_additional_keywords_1": "peta",
-  "map_back_to_agents": "Kembali ke Peta",
+  "map_back_to_maps": "Kembali ke Seluruh Peta",
   "map_coordinates": "Koordinat",
   "map_layout": "Tata Letak",
   "map_callouts": "Panggilan Tempat",
@@ -77,7 +80,7 @@
 
   "weapon_category": "Kategori",
   "weapon_additional_keywords_1": "senjata",
-  "weapon_back_to_agents": "Kembali ke Senjata",
+  "weapon_back_to_weapons": "Kembali ke Seluruh Senjata",
   "weapon_cost_title": "Harga",
   "weapon_cost_credit": "Kredit",
   "weapon_cost_credits": "Kredit",

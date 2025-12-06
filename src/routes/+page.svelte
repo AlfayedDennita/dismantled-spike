@@ -1,5 +1,8 @@
 <script>
   import { m } from '$lib/paraglide/messages.js';
+  import categories from '$lib/utils/categories.js';
+
+  const { home: _home, ...filteredCategories } = categories;
 
   const { data } = $props();
 </script>
@@ -12,15 +15,16 @@
       <section class="flex flex-col gap-4 p-4 md:bg-base-200 md:p-8">
         <h3 class="text-lg font-bold uppercase">{m.categories_title()}</h3>
         <ul class="grid gap-4 sm:grid-cols-2">
-          {#each data.categories as category (category.name)}
+          {#each Object.entries(filteredCategories) as [categoryId, category] (categoryId)}
             <li class="contents">
               <svelte:element
                 this={category.url ? 'a' : 'div'}
                 class={[
-                  'group @container flex h-20 items-stretch bg-primary contrast-more:text-primary-content',
-                  category.url
-                    ? 'text-primary-content'
-                    : 'text-primary-content/60',
+                  `group @container flex h-20 items-stretch bg-primary contrast-more:text-primary-content ${
+                    category.url
+                      ? 'text-primary-content'
+                      : 'text-primary-content/60'
+                  }`,
                   !category.url && 'select-none',
                 ]}
                 href={category.url}
@@ -30,14 +34,15 @@
                   class="flex grow flex-col justify-center p-4 @sm:flex-row @sm:items-center @sm:justify-start @sm:gap-1 @sm:px-6"
                 >
                   <span class="flex items-center gap-1 uppercase">
-                    <span class={['mb-1 iconify', category.icon]}></span>
+                    <span class="mb-1 {category.icon}"></span>
                     {category.name}
                   </span>
                   {#if !category.url}
                     <span
                       class="text-xs text-primary-content/40 italic contrast-more:text-primary-content"
-                      >({m.categories_coming_soon()})</span
                     >
+                      ({m.general_coming_soon()})
+                    </span>
                   {/if}
                 </span>
                 <span class="relative">
@@ -45,6 +50,7 @@
                     class="h-full w-24 object-cover object-center @xs:w-32"
                     src={category.image}
                     alt={category.name}
+                    loading="lazy"
                   />
                   {#if category.url}
                     <span
@@ -66,7 +72,12 @@
         <h3 class="text-lg font-bold uppercase">
           {m.home_recent_visits_title()}
         </h3>
-        <ul class="menu w-full bg-base-200 md:bg-base-300">
+        <div
+          class="flex h-40 items-center justify-center bg-base-200 text-center text-sm text-base-content/20 italic select-none contrast-more:text-base-content md:bg-base-300"
+        >
+          {m.general_coming_soon()}
+        </div>
+        <!-- <ul class="menu w-full bg-base-200 md:bg-base-300">
           {#each data.recentVisits as recentVisit (recentVisit.name)}
             <li>
               <a href={recentVisit.url} title={recentVisit.name}>
@@ -74,7 +85,7 @@
               </a>
             </li>
           {/each}
-        </ul>
+        </ul> -->
       </section>
     </aside>
   </div>
