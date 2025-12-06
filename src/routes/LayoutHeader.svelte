@@ -231,7 +231,10 @@
                 <span class="iconify text-3xl famicons--arrow-back-sharp"
                 ></span>
               </a>
-              <div class="hidden size-16 @sm:block" aria-hidden="true"></div>
+              <div
+                class="hidden size-16 max-lg:@sm:block"
+                aria-hidden="true"
+              ></div>
             {/if}
             <div
               class="mx-auto hidden w-full max-w-324 lg:flex lg:justify-between lg:gap-4"
@@ -283,7 +286,7 @@
               <div
                 class={[
                   'max-lg:navbar-center',
-                  variant === 'detail' && 'w-full flex-1',
+                  variant === 'detail' && 'max-lg:w-full max-lg:flex-1',
                 ]}
               >
                 <a
