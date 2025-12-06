@@ -285,7 +285,7 @@
             >
               <div
                 class={[
-                  'max-lg:navbar-center',
+                  'mx-2 max-lg:navbar-center @sm:mx-0',
                   variant === 'detail' && 'max-lg:w-full max-lg:flex-1',
                 ]}
               >
@@ -316,7 +316,7 @@
                 </a>
                 {#if variant === 'detail'}
                   <h2
-                    class="line-clamp-1 w-full text-center font-extrabold text-ellipsis uppercase lg:hidden"
+                    class="line-clamp-1 w-full font-extrabold text-ellipsis uppercase lg:hidden @sm:text-center"
                   >
                     {detailTitle}
                   </h2>

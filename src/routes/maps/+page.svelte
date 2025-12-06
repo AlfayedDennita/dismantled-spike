@@ -29,7 +29,7 @@
         </figure>
         <div class="@container card-body bg-primary text-primary-content">
           <div
-            class="flex flex-col justify-between gap-2 @2xs:flex-row @2xs:items-center"
+            class="flex flex-col justify-between gap-1 @2xs:flex-row @2xs:items-center @2xs:gap-2"
           >
             <h2 class="card-title text-xl uppercase">
               {map.name}
