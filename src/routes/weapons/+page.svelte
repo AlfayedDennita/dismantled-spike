@@ -16,7 +16,7 @@
           <img
             class="aspect-2/1 w-full object-contain object-center p-4"
             src={weapon.images.display}
-            alt={weapon.name}
+            alt={m.weapons_weapon_display({ weapon: weapon.name })}
             loading="lazy"
           />
           <div
@@ -25,7 +25,7 @@
             <img
               class="aspect-2/1 w-full object-contain object-center p-4"
               src={weapon.images.flat}
-              alt="{weapon.name} Flat"
+              alt={m.weapons_weapon_flat({ weapon: weapon.name })}
               loading="lazy"
             />
           </div>

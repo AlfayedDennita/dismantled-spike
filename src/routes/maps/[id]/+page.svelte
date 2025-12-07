@@ -15,7 +15,7 @@
       <img
         class="aspect-video w-full object-cover object-center sm:max-w-2xl"
         src={data.map.images.splash}
-        alt={m.maps_splash_art({ map: data.map.name })}
+        alt={m.maps_map_splash({ map: data.map.name })}
         loading="lazy"
       />
     </figure>
@@ -45,7 +45,7 @@
           <img
             class="aspect-square w-full object-contain object-center sm:max-w-sm"
             src={data.map.images.layout}
-            alt="{data.map.name} Layout"
+            alt={m.maps_map_layout({ map: data.map.name })}
             loading="lazy"
           />
         </section>

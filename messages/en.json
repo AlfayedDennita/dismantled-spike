@@ -41,6 +41,7 @@
   "footer_back_to_top": "Back to Top",
 
   "home_recent_visits_title": "Your Recent Visits",
+  "home_category_banner": "{category} Banner",
 
   "error_back_to_home": "Back to Home",
 
@@ -48,7 +49,9 @@
   "agents_additional_keywords_1": "agents",
   "agents_additional_keywords_2": "characters",
   "agents_additional_keywords_3": "heroes",
-  "agents_portrait": "{agent} Portrait",
+  "agents_agent_portrait": "{agent} Portrait",
+  "agents_role_icon": "{role} Icon",
+  "agents_ability_icon": "{ability} Icon",
 
   "agent_additional_keywords_1": "agent",
   "agent_additional_keywords_2": "character",
@@ -61,7 +64,8 @@
 
   "maps_description": "Each match of VALORANT takes place on a map. There are four map types: standard, team deathmatch, skirmish, and practice. VALORANT uses a deterministic map system in order to increase the variety of maps players will encounter and vastly reduce the possibility of playing on the same map multiple times in a row.",
   "maps_additional_keywords_1": "maps",
-  "maps_splash_art": "{map} Splash Art",
+  "maps_map_splash": "{map} Splash Art",
+  "maps_map_layout": "{map} Layout",
   "maps_types_standard": "Standard",
   "maps_types_practice": "Practice",
 
@@ -77,6 +81,8 @@
   "weapons_additional_keywords_2": "guns",
   "weapons_categories_melee": "Melee",
   "weapons_categories_sidearm": "Sidearm",
+  "weapons_weapon_display": "{weapon} Display",
+  "weapons_weapon_flat": "{weapon} Flat Icon",
 
   "weapon_category": "Category",
   "weapon_additional_keywords_1": "weapon",

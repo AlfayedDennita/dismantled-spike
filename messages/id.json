@@ -41,6 +41,7 @@
   "footer_back_to_top": "Kembali ke Atas",
 
   "home_recent_visits_title": "Kunjungan Terakhirmu",
+  "home_category_banner": "Banner {category}",
 
   "error_back_to_home": "Kembali ke Beranda",
 
@@ -48,7 +49,9 @@
   "agents_additional_keywords_1": "agen",
   "agents_additional_keywords_2": "karakter",
   "agents_additional_keywords_3": "pahlawan",
-  "agents_portrait": "Potret {agent}",
+  "agents_agent_portrait": "Potret {agent}",
+  "agents_role_icon": "Ikon {role}",
+  "agents_ability_icon": "Ikon {ability}",
 
   "agent_additional_keywords_1": "agen",
   "agent_additional_keywords_2": "karakter",
@@ -61,7 +64,8 @@
 
   "maps_description": "Setiap pertandingan di VALORANT berlangsung di sebuah peta. Terdapat empat tipe peta: standar, team deathmatch, skirmish, dan latihan. VALORANT menggunakan sistem peta deterministik untuk meningkatkan variasi dari peta yang akan ditemui pemain dan sangat mengurangi kemungkinan untuk bermain di peta yang sama berulang kali.",
   "maps_additional_keywords_1": "peta",
-  "maps_splash_art": "Gambar Splash {map}",
+  "maps_map_splash": "Gambar Splash {map}",
+  "maps_map_layout": "Tata Letak {map}",
   "maps_types_standard": "Standar",
   "maps_types_practice": "Latihan",
 
@@ -77,6 +81,8 @@
   "weapons_additional_keywords_2": "senapan",
   "weapons_categories_melee": "Pisau",
   "weapons_categories_sidearm": "Pistol",
+  "weapons_weapon_display": "Display {weapon}",
+  "weapons_weapon_flat": "Ikon Flat {weapon}",
 
   "weapon_category": "Kategori",
   "weapon_additional_keywords_1": "senjata",

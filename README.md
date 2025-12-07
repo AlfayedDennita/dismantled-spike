@@ -1,4 +1,4 @@
-# [Dismantled Spike](https://dismantled-spike.alfayeddennita.workers.dev) &middot; ![v0.0.1](https://img.shields.io/badge/Build-v0.0.1-268FD9?style=flat-square) ![SvelteKit](https://img.shields.io/badge/SvelteKit-FF3E00?style=flat-square&logo=svelte&logoColor=white)
+# [Dismantled Spike](https://dismantled-spike.alfayeddennita.workers.dev) &middot; ![v0.0.2](https://img.shields.io/badge/Build-v0.0.2-268FD9?style=flat-square) ![SvelteKit](https://img.shields.io/badge/SvelteKit-FF3E00?style=flat-square&logo=svelte&logoColor=white)
 
 ![Dismantled Spike](/static/images/og/default.png)
 

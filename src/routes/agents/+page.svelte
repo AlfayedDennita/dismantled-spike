@@ -21,7 +21,7 @@
           <img
             class="z-10 aspect-512/465 w-full object-contain object-center"
             src={agent.images.portrait}
-            alt={m.agents_portrait({ agent: agent.name })}
+            alt={m.agents_agent_portrait({ agent: agent.name })}
             loading="lazy"
           />
         </figure>
@@ -30,7 +30,7 @@
             <img
               class="mb-1 h-4"
               src={agent.role.icon}
-              alt={agent.role.name}
+              alt={m.agents_role_icon({ role: agent.role.name })}
               loading="lazy"
             />
             <h2 class="card-title text-xl uppercase">{agent.name}</h2>

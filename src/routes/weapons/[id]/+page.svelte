@@ -34,7 +34,7 @@
       <img
         class="aspect-2/1 w-full object-contain object-center sm:max-w-sm"
         src={data.weapon.images.display}
-        alt={data.weapon.name}
+        alt={m.weapons_weapon_display({ weapon: data.weapon.name })}
         loading="lazy"
       />
     </figure>

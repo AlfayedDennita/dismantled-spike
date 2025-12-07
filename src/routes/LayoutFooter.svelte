@@ -18,7 +18,7 @@
 
 {#snippet externalLink(url, text)}
   <a
-    class="font-bold text-primary/50 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary/80"
+    class="font-bold text-primary/90 underline decoration-transparent transition-colors hover:text-primary hover:decoration-primary motion-reduce:transition-none contrast-more:text-primary contrast-more:hover:text-primary dark:text-primary"
     href={url}
     rel="external"
     target="_blank"
@@ -42,17 +42,17 @@
     >
       <div class="flex items-center gap-2 select-none md:gap-4">
         <span
-          class="aspect-689/1024 h-6 bg-base-content/30 contrast-more:bg-base-content"
+          class="aspect-689/1024 h-6 bg-base-content/60 contrast-more:bg-base-content"
           style:mask={`url("${BrandIcon}") no-repeat center`}
         ></span>
         <h3
-          class="font-brand text-2xl text-base-content/30 contrast-more:text-base-content"
+          class="font-brand text-2xl text-base-content/60 contrast-more:text-base-content"
         >
           Dismantled Spike
         </h3>
       </div>
       <div
-        class="flex flex-col items-center gap-2 text-sm text-pretty text-base-content/40 contrast-more:text-base-content md:items-start"
+        class="flex flex-col items-center gap-2 text-sm text-pretty text-base-content/60 contrast-more:text-base-content md:items-start"
       >
         <p>
           {@html m.footer_copyright({ year: copyrightYear })}
@@ -67,7 +67,7 @@
       </div>
     </div>
     <aside
-      class="flex flex-col items-center justify-end gap-1 text-center text-sm text-base-content/40 contrast-more:text-base-content md:w-1/2 md:items-end md:text-right xl:flex-row"
+      class="flex flex-col items-center justify-end gap-1 text-center text-sm text-base-content/60 contrast-more:text-base-content md:w-1/2 md:items-end md:text-right xl:flex-row"
     >
       <p>
         {m.footer_app_developed_by()}

@@ -31,7 +31,7 @@
       <img
         class="aspect-512/465 w-full object-contain object-center sm:w-6/12 md:w-4/12 lg:w-full"
         src={data.agent.images.portrait}
-        alt={m.agents_portrait({ agent: data.agent.name })}
+        alt={m.agents_agent_portrait({ agent: data.agent.name })}
         loading="lazy"
       />
       <div
@@ -53,17 +53,18 @@
               <img
                 class="mb-0.5 size-3 object-contain object-center"
                 src={data.agent.role.icon}
-                alt={data.agent.role.name}
+                alt={m.agents_role_icon({ role: data.agent.role.name })}
                 loading="lazy"
               />
               {data.agent.role.name}
             </div>
             <div
-              class="tooltip tooltip-bottom flex items-center justify-center text-sm tooltip-secondary text-base-content/20 transition-colors hover:text-base-content motion-reduce:transition-none contrast-more:text-base-content"
-              aria-label="Role Description"
+              class="tooltip tooltip-bottom flex items-center justify-center text-sm tooltip-secondary text-base-content/60 transition-colors hover:text-base-content motion-reduce:transition-none contrast-more:text-base-content"
+              role="tooltip"
               data-tip={data.agent.role.description}
             >
               <span class="iconify famicons--information-circle-sharp"></span>
+              <span class="sr-only">{data.agent.role.description}</span>
             </div>
           </div>
         </div>
@@ -89,7 +90,7 @@
                   <img
                     class="mb-1 size-4 object-contain object-center"
                     src={ability.icon}
-                    alt={ability.name}
+                    alt={m.agents_ability_icon({ ability: ability.name })}
                     loading="lazy"
                   />
                   <h3 class="font-bold">

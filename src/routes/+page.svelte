@@ -13,18 +13,14 @@
   >
     <main class="lg:w-8/12">
       <section class="flex flex-col gap-4 p-4 md:bg-base-200 md:p-8">
-        <h3 class="text-lg font-bold uppercase">{m.categories_title()}</h3>
+        <h2 class="text-lg font-bold uppercase">{m.categories_title()}</h2>
         <ul class="grid gap-4 sm:grid-cols-2">
           {#each Object.entries(filteredCategories) as [categoryId, category] (categoryId)}
             <li class="contents">
               <svelte:element
                 this={category.url ? 'a' : 'div'}
                 class={[
-                  `group @container flex h-20 items-stretch bg-primary contrast-more:text-primary-content ${
-                    category.url
-                      ? 'text-primary-content'
-                      : 'text-primary-content/60'
-                  }`,
+                  'group @container flex h-20 items-stretch bg-primary text-primary-content',
                   !category.url && 'select-none',
                 ]}
                 href={category.url}
@@ -38,18 +34,20 @@
                     {category.name}
                   </span>
                   {#if !category.url}
-                    <span
-                      class="text-xs text-primary-content/40 italic contrast-more:text-primary-content"
-                    >
+                    <span class="text-xs">
                       ({m.general_coming_soon()})
                     </span>
                   {/if}
                 </span>
                 <span class="relative">
                   <img
-                    class="h-full w-24 object-cover object-center @xs:w-32"
+                    class={[
+                      'h-full w-24 object-cover object-center @xs:w-32',
+                      !category.url &&
+                        'brightness-60 contrast-more:brightness-100',
+                    ]}
                     src={category.image}
-                    alt={category.name}
+                    alt={m.home_category_banner({ category: category.name })}
                     loading="lazy"
                   />
                   {#if category.url}
@@ -69,11 +67,11 @@
     </main>
     <aside class="lg:w-4/12">
       <section class="flex flex-col gap-4 p-4 md:bg-base-200 md:p-8">
-        <h3 class="text-lg font-bold uppercase">
+        <h2 class="text-lg font-bold uppercase">
           {m.home_recent_visits_title()}
-        </h3>
+        </h2>
         <div
-          class="flex h-40 items-center justify-center bg-base-200 text-center text-sm text-base-content/20 italic select-none contrast-more:text-base-content md:bg-base-300"
+          class="flex h-40 items-center justify-center bg-base-200 text-center text-sm text-base-content/60 italic select-none contrast-more:text-base-content md:bg-base-300"
         >
           {m.general_coming_soon()}
         </div>

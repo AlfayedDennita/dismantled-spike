@@ -16,7 +16,7 @@
           <img
             class="aspect-video w-full object-cover object-center brightness-75 transition-all group-hover:scale-125 group-hover:brightness-100 motion-reduce:transition-none contrast-more:brightness-100"
             src={map.images.splash}
-            alt={m.maps_splash_art({ map: map.name })}
+            alt={m.maps_map_splash({ map: map.name })}
             loading="lazy"
           />
           {#if map.sitesDescription}
